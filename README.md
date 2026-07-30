@@ -76,6 +76,19 @@ The build output (`out/`) is small and syncs fine.
 
 ## Design notes
 
+**Responsive behavior** — the compact hero tightens its type and spacing on
+short screens. On mobile, signature dishes and reels become horizontal
+scroll-snap rails, the printed menu gains category shortcuts, and a fixed
+Menu/Directions dock appears only after the hero and retires before the Visit
+section. Tablet and desktop layouts keep their multi-column grids. The mobile
+drawer traps focus, closes with Escape or at the desktop breakpoint, and all
+video reels provide an explicit play/pause control.
+
+**21st design context** — `.21st/design.json` is the durable source for the
+site's visual identity, responsive and accessibility constraints, and the
+21st.dev references behind accepted interface decisions. Keep it aligned when
+a future change alters the palette, typography, motifs or responsive direction.
+
 **Palette** — parchment `#F5EDDC`, maroon `#71301F`, terracotta `#9A3714`,
 lifted from the brand's own Instagram artwork. (The brief listed `#F5EDD`,
 which is five hex digits; `#F5EDDC` is the assumed intent.)
@@ -124,7 +137,7 @@ disabled. Nothing is animation-dependent to be readable.
 | --- | --- |
 | `Untitled video.mp4` | hero background (silent, 1.5 MB, was 9.8 MB) + two food stills |
 | `reel1.mp4` | ambience reel (silent loop) + four photographs |
-| `reel3.mp4` | guest testimonial — keeps audio, starts muted with an unmute control |
+| `reel3.mp4` | guest testimonial — keeps audio, starts muted, with play/pause and mute controls |
 | `Ghee-*-No-Background.png` | the three floating signature dishes |
 | `logo.jpg` | logo mark extracted to transparent PNG, cream and maroon |
 | `3.webp` | the filter kaapi photograph, cropped out of the artwork |
