@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { signatures, site } from "@/data/site";
 import { BananaLeaf } from "./Ornaments";
 import Reveal from "./Reveal";
@@ -13,6 +16,16 @@ import ScrollStage from "./ScrollStage";
  * them read as floating rather than pasted.
  */
 export default function Signatures() {
+  const [mobileRail, setMobileRail] = useState(false);
+
+  useEffect(() => {
+    const query = window.matchMedia("(max-width: 639px)");
+    const update = () => setMobileRail(query.matches);
+    update();
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, []);
+
   return (
     <ScrollStage
       id="signatures"
@@ -33,17 +46,22 @@ export default function Signatures() {
           </p>
         </Reveal>
 
-        <ul className="mt-16 grid gap-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+        <ul
+          aria-label="Signature dishes"
+          aria-describedby={mobileRail ? "signature-rail-hint" : undefined}
+          tabIndex={mobileRail ? 0 : -1}
+          className="no-scrollbar -mx-4 mt-12 flex snap-x snap-mandatory gap-5 overflow-x-auto px-4 pb-8 focus-visible:ring-inset sm:mx-0 sm:mt-16 sm:grid sm:grid-cols-2 sm:gap-12 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3 lg:gap-8"
+        >
           {signatures.map((dish, i) => (
             <Reveal
               as="li"
               key={dish.name}
               delay={i * 0.1}
-              className="group text-center"
+              className="group w-[82vw] max-w-[20rem] shrink-0 snap-center text-center sm:w-auto sm:max-w-none"
             >
               {/* Each dish rises a little differently — index drives the offset */}
               <div
-                className="relative mx-auto aspect-square w-full max-w-[20rem]"
+                className="signature-drift relative mx-auto aspect-square w-full max-w-[20rem]"
                 style={{ translate: `0 calc(var(--stage) * ${-3 - i * 1.6}rem)` }}
               >
                 {/* soft ground shadow so the cutout doesn't float in a void */}
@@ -69,6 +87,10 @@ export default function Signatures() {
             </Reveal>
           ))}
         </ul>
+        <p id="signature-rail-hint" className="sr-only">
+          On small screens, swipe horizontally or use the left and right arrow keys to see every
+          dish.
+        </p>
 
         {/* Google's own price band — a real figure, not one we made up. */}
         <Reveal className="mt-16 text-center">
@@ -79,7 +101,7 @@ export default function Signatures() {
               href={site.googleListing}
               target="_blank"
               rel="noopener noreferrer"
-              className="underline decoration-terracotta/40 underline-offset-4 hover:decoration-terracotta"
+              className="inline-flex min-h-[44px] items-center justify-center underline decoration-terracotta/40 underline-offset-4 hover:decoration-terracotta"
             >
               as listed on Google
             </a>

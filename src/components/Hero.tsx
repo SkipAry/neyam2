@@ -4,6 +4,56 @@ import { useEffect, useRef } from "react";
 import { mapsLink, site } from "@/data/site";
 import { Gopuram, KolamBorder, Separator } from "./Ornaments";
 
+function HeroFacts({ compact = false }: { compact?: boolean }) {
+  const label = compact
+    ? "text-[10px] uppercase tracking-caps text-terracotta-ink"
+    : "text-[11px] uppercase tracking-caps text-parchment/80";
+  const value = compact
+    ? "mt-1 font-display text-sm text-maroon-deep"
+    : "mt-1.5 font-display text-sm text-parchment-light sm:text-lg";
+
+  return (
+    <dl
+      className={
+        compact
+          ? "grid grid-cols-3 gap-x-3"
+          : "hero-facts-main mt-10 grid max-w-2xl grid-cols-3 gap-x-4 gap-y-5 border-t border-parchment/20 pt-6 short:mt-5 short:pt-4 sm:gap-x-6 sm:pt-8 lg:mt-14 short:lg:mt-8"
+      }
+    >
+      <div>
+        <dt className={label}>Open</dt>
+        <dd className={value}>{site.hours}</dd>
+      </div>
+      <div>
+        <dt className={label}>Days</dt>
+        <dd className={value}>{site.openDays}</dd>
+      </div>
+      {site.googleRating != null && site.googleReviewCount != null ? (
+        <div>
+          <dt className={label}>On Google</dt>
+          <dd className={value}>
+            <a
+              href={site.googleListing}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`inline-flex min-h-[44px] items-center underline underline-offset-4 ${
+                compact
+                  ? "decoration-terracotta/40 hover:decoration-terracotta"
+                  : "decoration-brass/60 hover:decoration-brass"
+              }`}
+            >
+              {site.googleRating.toFixed(1)} ★
+              <span className={`ml-1 text-xs ${compact ? "text-ink/70" : "text-parchment/85"}`}>
+                ({site.googleReviewCount})
+              </span>
+            </a>
+          </dd>
+        </div>
+      ) : null}
+    </dl>
+  );
+}
+
 /**
  * HERO — the podi-on-idli footage, held behind parchment.
  *
@@ -44,7 +94,8 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="home" className="relative min-h-[100svh] overflow-hidden bg-maroon-deep">
+    <>
+      <section id="home" className="relative min-h-[100svh] overflow-hidden bg-maroon-deep">
       {/* Footage */}
       <video
         ref={videoRef}
@@ -77,31 +128,30 @@ export default function Hero() {
       {/* Padding tightens twice: once for narrow screens, and again via the
           `short` height variant so a landscape tablet or short laptop still
           lands the stats row above the fold. */}
-      <div className="relative mx-auto flex min-h-[100svh] max-w-site flex-col justify-end px-4 pb-14 pt-28 sm:px-6 sm:pb-20 lg:px-8 lg:pb-32 lg:pt-32 short:lg:pb-14 short:lg:pt-24">
+      <div className="relative mx-auto flex min-h-[100svh] max-w-site flex-col justify-end px-4 pb-14 pt-28 short:pb-8 short:pt-24 sm:px-6 sm:pb-20 lg:px-8 lg:pb-32 lg:pt-32 short:lg:pb-14 short:lg:pt-24">
         <p className="eyebrow !text-parchment/90">
           {site.address.line2} · {site.address.city}
         </p>
 
         {/* The size is capped against viewport *height* as well as width, so a
             short landscape window doesn't get 80px display type. */}
-        <h1 className="mt-6 max-w-4xl font-display text-[clamp(2.7rem,min(8vw,10.5vh),5.5rem)] font-semibold leading-[1.02] text-parchment-light">
+        <h1 className="mt-6 max-w-4xl font-display text-[clamp(2.45rem,min(11vw,10.5vh),5.5rem)] font-semibold leading-[1.02] text-parchment-light short:mt-3 sm:text-[clamp(2.7rem,min(8vw,10.5vh),5.5rem)]">
           A slower corner of
-          <br />
-          South India,
+          <br className="hidden sm:block" /> South India,
           <span className="italic text-brass"> brought to Pune.</span>
         </h1>
 
-        <Separator className="mt-8 text-parchment/40 short:mt-5" />
+        <Separator className="mt-8 text-parchment/40 short:mt-4" />
 
-        <p className="mt-6 max-w-xl text-base leading-relaxed text-parchment/90 md:text-lg">
+        <p className="mt-6 max-w-xl text-base leading-relaxed text-parchment/90 short:mt-4 md:text-lg">
           Bangalore Benne Dose crisped in ghee, thatte idli under a dusting of
           podi, and filter kaapi poured the long way. Breakfast, unhurried.
         </p>
 
-        <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4 short:mt-7">
+        <div className="mt-10 flex flex-col gap-3 short:mt-5 sm:flex-row sm:flex-wrap sm:gap-4">
           <a
             href="#menu"
-            className="inline-flex min-h-[54px] items-center justify-center rounded-full bg-parchment-light px-8 text-base font-semibold text-maroon-deep transition-transform duration-300 hover:-translate-y-0.5"
+            className="inline-flex min-h-[50px] items-center justify-center rounded-full bg-parchment-light px-8 text-base font-semibold text-maroon-deep transition-transform duration-300 hover:-translate-y-0.5 sm:min-h-[54px]"
           >
             See the Menu
           </a>
@@ -109,52 +159,25 @@ export default function Hero() {
             href={mapsLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex min-h-[54px] items-center justify-center rounded-full border border-parchment/40 px-8 text-base font-semibold text-parchment-light transition-colors hover:border-parchment hover:bg-parchment/10"
+            className="inline-flex min-h-[50px] items-center justify-center rounded-full border border-parchment/40 px-8 text-base font-semibold text-parchment-light transition-colors hover:border-parchment hover:bg-parchment/10 sm:min-h-[54px]"
           >
             Get Directions
           </a>
         </div>
 
-        <dl className="mt-10 grid max-w-2xl grid-cols-3 gap-x-4 gap-y-5 border-t border-parchment/20 pt-6 sm:gap-x-6 sm:pt-8 lg:mt-14 short:mt-7 short:pt-5 short:lg:mt-8">
-          <div>
-            <dt className="text-[11px] uppercase tracking-caps text-parchment/80">Open</dt>
-            <dd className="mt-1.5 font-display text-sm text-parchment-light sm:text-lg">
-              {site.hours}
-            </dd>
-          </div>
-          <div>
-            <dt className="text-[11px] uppercase tracking-caps text-parchment/80">Days</dt>
-            <dd className="mt-1.5 font-display text-sm text-parchment-light sm:text-lg">
-              {site.openDays}
-            </dd>
-          </div>
-          {site.googleRating != null && site.googleReviewCount != null ? (
-            <div>
-              <dt className="text-[11px] uppercase tracking-caps text-parchment/80">
-                On Google
-              </dt>
-              <dd className="mt-1.5 font-display text-sm text-parchment-light sm:text-lg">
-                <a
-                  href={site.googleListing}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline decoration-brass/60 underline-offset-4 hover:decoration-brass"
-                >
-                  {site.googleRating.toFixed(1)} ★
-                  <span className="ml-1 text-sm text-parchment/85">
-                    ({site.googleReviewCount})
-                  </span>
-                </a>
-              </dd>
-            </div>
-          ) : null}
-        </dl>
+        <HeroFacts />
       </div>
 
       {/* Kolam run along the very bottom edge, as on the brand's artwork */}
       <div className="absolute inset-x-0 bottom-0 overflow-hidden text-brass/40" aria-hidden="true">
         <KolamBorder height={18} uid="hero" />
       </div>
-    </section>
+      </section>
+      <div className="hero-facts-short border-b border-maroon/10 bg-parchment-deep px-4 py-4">
+        <div className="mx-auto max-w-site">
+          <HeroFacts compact />
+        </div>
+      </div>
+    </>
   );
 }

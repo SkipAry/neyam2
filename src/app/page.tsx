@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Kaapi from "@/components/Kaapi";
 import Menu from "@/components/Menu";
+import MobileQuickActions from "@/components/MobileQuickActions";
 import Posts from "@/components/Posts";
 import Reels from "@/components/Reels";
 import Signatures from "@/components/Signatures";
@@ -31,6 +32,7 @@ export default function Home() {
   return (
     <>
       <Header />
+      <MobileQuickActions />
       <main>
         <Hero />
         <Story />

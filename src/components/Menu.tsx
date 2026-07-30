@@ -44,36 +44,56 @@ export default function Menu() {
               <Separator className="mx-auto mt-5 text-terracotta/45" />
             </div>
 
+            <nav aria-label="Menu categories" className="-mx-2 mt-7 sm:hidden">
+              <ul className="no-scrollbar flex gap-2 overflow-x-auto px-2 pb-2">
+                {menu.map((section) => (
+                  <li key={section.id}>
+                    <a
+                      href={`#menu-${section.id}`}
+                      className="inline-flex min-h-[44px] items-center whitespace-nowrap rounded-full border border-maroon/15 bg-parchment px-4 text-xs font-semibold text-maroon-deep transition-colors hover:border-maroon/35 hover:bg-parchment-deep"
+                    >
+                      {section.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
             <div className="mt-10 grid gap-x-14 gap-y-10 sm:grid-cols-2">
               {menu.map((section, i) => (
-                <Reveal
+                <div
                   key={section.id}
-                  delay={Math.min(i * 0.06, 0.3)}
-                  className="break-inside-avoid"
+                  id={`menu-${section.id}`}
+                  className="scroll-mt-28"
                 >
-                  <h3 className="font-display text-lg font-semibold uppercase tracking-wide text-maroon-deep">
-                    {section.title}
-                  </h3>
-                  <p className="mt-1.5 text-xs italic leading-relaxed text-ink/75">
-                    {section.blurb}
-                  </p>
+                  <Reveal
+                    delay={Math.min(i * 0.06, 0.3)}
+                    className="break-inside-avoid"
+                  >
+                    <h3 className="font-display text-lg font-semibold uppercase tracking-wide text-maroon-deep">
+                      {section.title}
+                    </h3>
+                    <p className="mt-1.5 text-xs italic leading-relaxed text-ink/75">
+                      {section.blurb}
+                    </p>
 
-                  <ul className="mt-4 divide-y divide-maroon/10">
-                    {section.items.map((item) => (
-                      <li key={item.name} className="flex items-baseline py-2.5">
-                        <span className="font-medium text-ink/90">{item.name}</span>
-                        {item.price != null ? (
-                          <>
-                            <span className="leader" aria-hidden="true" />
-                            <span className="font-display text-base font-semibold text-maroon">
-                              ₹{item.price}
-                            </span>
-                          </>
-                        ) : null}
-                      </li>
-                    ))}
-                  </ul>
-                </Reveal>
+                    <ul className="mt-4 divide-y divide-maroon/10">
+                      {section.items.map((item) => (
+                        <li key={item.name} className="flex items-baseline py-2.5">
+                          <span className="font-medium text-ink/90">{item.name}</span>
+                          {item.price != null ? (
+                            <>
+                              <span className="leader" aria-hidden="true" />
+                              <span className="font-display text-base font-semibold text-maroon">
+                                ₹{item.price}
+                              </span>
+                            </>
+                          ) : null}
+                        </li>
+                      ))}
+                    </ul>
+                  </Reveal>
+                </div>
               ))}
             </div>
 

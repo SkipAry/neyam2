@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { mapsLink, site, telLink } from "@/data/site";
 
 const links = [
@@ -15,6 +15,9 @@ const links = [
 export default function Header() {
   const [solid, setSolid] = useState(false);
   const [open, setOpen] = useState(false);
+  const homeRef = useRef<HTMLAnchorElement | null>(null);
+  const toggleRef = useRef<HTMLButtonElement | null>(null);
+  const firstMobileLinkRef = useRef<HTMLAnchorElement | null>(null);
 
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > 40);
@@ -26,12 +29,56 @@ export default function Header() {
   // Lock the page while the drawer is open, and let Escape close it.
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    const panel = document.getElementById("mobile-nav");
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const previousOverflow = document.body.style.overflow;
+    const focusFrame = requestAnimationFrame(() => {
+      if (!panel?.hidden) firstMobileLinkRef.current?.focus();
+    });
+    const onDesktop = () => {
+      if (!desktop.matches) return;
+      homeRef.current?.focus();
+      setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        return;
+      }
+      if (e.key !== "Tab" || !panel) return;
+
+      const focusable = [
+        homeRef.current,
+        toggleRef.current,
+        ...Array.from(
+          panel.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), [tabindex="0"]')
+        ),
+      ].filter((node): node is HTMLElement => node != null);
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
     document.addEventListener("keydown", onKey);
+    desktop.addEventListener("change", onDesktop);
     document.body.style.overflow = "hidden";
+    document.body.classList.add("mobile-nav-open");
+
     return () => {
+      cancelAnimationFrame(focusFrame);
       document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
+      desktop.removeEventListener("change", onDesktop);
+      document.body.style.overflow = previousOverflow;
+      document.body.classList.remove("mobile-nav-open");
+      if (panel?.contains(document.activeElement)) toggleRef.current?.focus();
     };
   }, [open]);
 
@@ -59,10 +106,16 @@ export default function Header() {
         opaque
           ? "border-b border-maroon/15 bg-parchment/95 backdrop-blur-md"
           : "bg-gradient-to-b from-maroon-deep/55 to-transparent"
-      }`}
+      } motion-reduce:transition-none`}
     >
       <div className="mx-auto flex h-20 max-w-site items-center justify-between px-4 sm:px-6 lg:px-8">
-        <a href="#home" className="flex items-center gap-3" aria-label={`${site.name} — home`}>
+        <a
+          ref={homeRef}
+          href="#home"
+          onClick={() => setOpen(false)}
+          className="flex items-center gap-3"
+          aria-label={`${site.name} — home`}
+        >
           {/* Two marks rather than a CSS filter, so each stays crisp */}
           <Image
             src={opaque ? "/brand/mark-maroon.png" : "/brand/mark-cream.png"}
@@ -116,6 +169,7 @@ export default function Header() {
         </nav>
 
         <button
+          ref={toggleRef}
           type="button"
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
@@ -124,17 +178,17 @@ export default function Header() {
           className="flex h-12 w-12 flex-col items-center justify-center gap-[5px] lg:hidden"
         >
           <span
-            className={`block h-[2px] w-6 transition-all duration-300 ${bar} ${
+            className={`block h-[2px] w-6 transition-all duration-300 motion-reduce:transition-none ${bar} ${
               open ? "translate-y-[7px] rotate-45" : ""
             }`}
           />
           <span
-            className={`block h-[2px] w-6 transition-all duration-200 ${bar} ${
+            className={`block h-[2px] w-6 transition-all duration-200 motion-reduce:transition-none ${bar} ${
               open ? "opacity-0" : ""
             }`}
           />
           <span
-            className={`block h-[2px] w-6 transition-all duration-300 ${bar} ${
+            className={`block h-[2px] w-6 transition-all duration-300 motion-reduce:transition-none ${bar} ${
               open ? "-translate-y-[7px] -rotate-45" : ""
             }`}
           />
@@ -145,23 +199,34 @@ export default function Header() {
       <div
         id="mobile-nav"
         hidden={!open}
-        className="border-t border-maroon/15 bg-parchment px-4 pb-8 pt-2 sm:px-6 lg:hidden"
+        className="max-h-[calc(100svh-5rem)] overflow-y-auto border-t border-maroon/15 bg-parchment px-4 pb-8 pt-2 sm:px-6 lg:hidden"
       >
         <nav aria-label="Main mobile">
           <ul className="divide-y divide-maroon/10">
-            {links.map((l) => (
+            {links.map((l, index) => (
               <li key={l.href}>
                 <a
+                  ref={index === 0 ? firstMobileLinkRef : undefined}
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="block py-4 font-display text-lg text-maroon-deep"
+                  className="grid min-h-[52px] grid-cols-[2.25rem_1fr_auto] items-center gap-3 py-2 font-display text-lg text-maroon-deep"
                 >
-                  {l.label}
+                  <span className="font-sans text-[10px] font-semibold tracking-caps text-terracotta-ink">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span>{l.label}</span>
+                  <span className="font-sans text-base text-maroon/45" aria-hidden="true">
+                    ↘
+                  </span>
                 </a>
               </li>
             ))}
           </ul>
         </nav>
+        <div className="flex items-center justify-between border-b border-maroon/10 py-3 text-[10px] font-semibold uppercase tracking-caps text-terracotta-ink">
+          <span>Open every day</span>
+          <span>{site.hours}</span>
+        </div>
         <a
           href={telLink || mapsLink}
           {...(telLink ? {} : { target: "_blank", rel: "noopener noreferrer" })}
