@@ -1,0 +1,191 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────────────────────────────────
+   NEYAM — global styling
+   ───────────────────────────────────────────────────────────── */
+
+@layer base {
+  :root {
+    /* scroll-driven values, written by ScrollStage */
+    --stage: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* keeps anchored sections clear of the fixed header */
+    scroll-padding-top: 5.5rem;
+  }
+
+  body {
+    @apply bg-parchment text-ink antialiased;
+    /* Subtle laid-paper tooth. Two offset dot grids read as fibre without
+       shipping a texture image. */
+    background-image:
+      radial-gradient(rgba(113, 48, 31, 0.045) 1px, transparent 1px),
+      radial-gradient(rgba(113, 48, 31, 0.03) 1px, transparent 1px);
+    background-size: 22px 22px, 22px 22px;
+    background-position: 0 0, 11px 11px;
+  }
+
+  /* Visible focus everywhere — the brand palette is low-contrast enough
+     that the browser default gets lost against parchment. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-maroon ring-offset-2 ring-offset-parchment;
+  }
+
+  ::selection {
+    @apply bg-maroon text-parchment-light;
+  }
+
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer components {
+  /* ── Stamp ─────────────────────────────────────────────── */
+  .stamp-wrap {
+    filter: drop-shadow(0 14px 26px rgba(82, 31, 18, 0.22));
+    transition: rotate 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                scale 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* ── Steam ─────────────────────────────────────────────── */
+  .steam-wisp {
+    animation: steam 4.5s ease-out infinite;
+    transform-origin: bottom center;
+    opacity: 0;
+  }
+
+  /* ── Reveal (scroll-in) ────────────────────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .reveal[data-shown="true"] {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* A stamp doesn't fade in — it drops and settles, slightly askew. */
+  .reveal-stamp {
+    opacity: 0;
+    transform: translateY(-38px) rotate(var(--stamp-from, -7deg)) scale(0.94);
+    transition:
+      opacity 0.7s ease-out,
+      transform 1.05s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .reveal-stamp[data-shown="true"] {
+    opacity: 1;
+    transform: translateY(0) rotate(var(--stamp-to, 0deg)) scale(1);
+  }
+
+  /* ── Self-drawing line work ───────────────────────────── */
+  .draw path,
+  .draw line,
+  .draw circle,
+  .draw rect {
+    stroke-dasharray: var(--len, 1200);
+    stroke-dashoffset: var(--len, 1200);
+    transition: stroke-dashoffset 2.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .draw[data-shown="true"] path,
+  .draw[data-shown="true"] line,
+  .draw[data-shown="true"] circle,
+  .draw[data-shown="true"] rect {
+    stroke-dashoffset: 0;
+  }
+
+  /* ── Dotted price leader, as on a printed menu ─────────── */
+  .leader {
+    flex: 1 1 auto;
+    margin: 0 0.6rem;
+    border-bottom: 1.5px dotted rgba(113, 48, 31, 0.35);
+    transform: translateY(-0.28rem);
+  }
+
+  /* ── Section label ─────────────────────────────────────── */
+  .eyebrow {
+    @apply text-[11px] font-semibold uppercase tracking-caps text-terracotta-ink;
+  }
+}
+
+@layer utilities {
+  /**
+   * Scroll drift, driven by ScrollStage's --stage variable.
+   *
+   * These use the standalone `translate` property rather than `transform`
+   * on purpose: `.reveal` and `.reveal-stamp` already animate `transform`,
+   * and two rules writing the same property means one silently wins.
+   * `translate`, `rotate` and `scale` are independent properties, so the
+   * scroll drift and the reveal animation compose cleanly instead.
+   */
+  .stage-drift-left {
+    translate: calc(var(--stage) * -14%) 0;
+  }
+
+  .stage-drift-right {
+    translate: calc(var(--stage) * 14%) 0;
+  }
+
+  .stage-rise {
+    translate: 0 calc(var(--stage) * -7rem);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Reduced motion.
+   Everything above is decorative. If the reader has asked their OS to
+   calm interfaces down, all of it becomes static and fully visible —
+   never invisible, which would hide content.
+   ───────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal,
+  .reveal-stamp {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .draw path,
+  .draw line,
+  .draw circle,
+  .draw rect {
+    stroke-dasharray: none !important;
+    stroke-dashoffset: 0 !important;
+    transition: none !important;
+  }
+
+  .steam-wisp {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+
+  .stamp-wrap {
+    transition: none !important;
+  }
+
+  .stage-drift-left,
+  .stage-drift-right,
+  .stage-rise {
+    transform: none !important;
+  }
+}

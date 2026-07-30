@@ -1,0 +1,12 @@
+node_modules/
+.next/
+.next-stale-*/
+out/
+*.log
+.env*
+.DS_Store
+*.tsbuildinfo
+next-env.d.ts
+code.tar.gz
+public/photos/*.jpg
+public/reels/reel-3.mp4
