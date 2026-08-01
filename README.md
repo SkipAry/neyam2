@@ -140,15 +140,19 @@ OneDrive would not delete is not referenced and does not reach `out/`.
 
 ## Deployment
 
-Any static host can serve `out/`.
+**Netlify** is the deployment target. Settings live in `netlify.toml` rather
+than the dashboard, so the build is reproducible: `npm run build`, publish
+`out/`, Node pinned to 22. Pushing to `main` on `SkipAry/neyam2` redeploys.
 
-For **Appwrite Sites**:
+No redirect rules are needed — the export writes `out/404.html`, which Netlify
+serves for unmatched routes, and `trailingSlash: true` makes directory URLs
+resolve on their own.
 
-1. Set the output directory to **`./out`**, not `./.next`.
-2. After a build, confirm the intended deployment is marked **Active**. A
-   deployment can remain Ready without becoming live.
-3. Do not mix manual archive uploads with Git deployments; a manual deployment
-   holding the Active slot can prevent a later Git build from going live.
+The build is a plain static export, so any static host *could* serve `out/`.
+Note that a subpath host (GitHub Pages project sites, for example) additionally
+needs `basePath`/`assetPrefix` set, because a handful of asset references —
+the favicon links in `app/layout.tsx` and the brand marks in the header and
+footer — are absolute from `/` and are not rewritten automatically.
 
 When the cafe has a real owned production domain, set `site.url` before the
 public launch. That enables the canonical URL, absolute Open Graph URL, sitemap

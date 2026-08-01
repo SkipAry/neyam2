@@ -2,12 +2,14 @@ import type { NextConfig } from "next";
 
 /**
  * Static export — `npm run build` emits a plain `out/` folder.
- * No server needed, so it can be hosted anywhere (Appwrite Sites, Netlify, S3).
  *
- * NOTE for deployment: if you host on Appwrite Sites, set the output
- * directory to `./out` (their Next.js preset wrongly defaults to `./.next`),
- * and after every Git push check the Deployments tab — a new build sits at
- * "Ready" and must be **Activated** to actually go live.
+ * Deployed to Netlify; build settings live in `netlify.toml`. Nothing here is
+ * host-specific, so the export stays portable.
+ *
+ * One caveat if this ever moves to a host that serves from a subpath rather
+ * than the domain root: `basePath` and `assetPrefix` must be set, because the
+ * favicon links in `app/layout.tsx` and the brand marks in the header and
+ * footer are plain `/…` references that Next does not rewrite.
  */
 const nextConfig: NextConfig = {
   output: "export",
