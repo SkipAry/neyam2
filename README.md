@@ -69,11 +69,19 @@ Do not invent or infer any missing value.
 
 ## Design system and interaction
 
-“Golden Morning” preserves Neyam's parchment `#F5EDDC`, maroon `#71301F`,
-terracotta `#9A3714`, brass `#DEB13A`, and ink `#2B1710` palette, paired with
-Cormorant Garamond and Google Sans. Oversized brand statements, real food
-cutouts, the ghee-sun motif, tactile paper, and restrained kolam details keep
-the regional identity specific.
+The completed **Golden Morning Editorial** direction preserves Neyam's
+parchment `#F5EDDC`, maroon `#71301F`, terracotta `#9A3714`, brass `#DEB13A`,
+and ink `#2B1710` palette. Cormorant Garamond now carries display headlines,
+quotes, and editorial moments; Google Sans carries body copy, facts, navigation,
+and controls. This clearer serif/sans hierarchy improves scanning without
+losing the warm, printed character.
+
+Oversized brand statements, real food cutouts, the ghee-sun motif, tactile
+paper, and restrained kolam details keep the regional identity specific. The
+Philosophy section uses a calmer parchment surface and more deliberate spacing,
+giving the story a pause between the dark menu and high-energy proof sections.
+All text and controls use WCAG AA-safe color pairings; brass remains decorative
+where it would not support small-text contrast.
 
 The **21st UI Explore/Build** workflow supplied project-aware cinematic-brand,
 kinetic-type, product-spotlight, and touch-navigation references. **UI/UX Pro
@@ -83,17 +91,22 @@ language; generic SaaS cards, glass-heavy styling, and decorative gradients were
 excluded. Accepted decisions and references live in **`.21st/design.json`**.
 
 3D is limited to the hero kaapi tumbler and signature food spotlight. Both use
-restrained CSS perspective without scroll hijacking, and become fully static
-whenever reduced motion is requested.
+restrained CSS perspective without scroll hijacking. Entrance reveals are slow
+and finite, while continuous motion is reserved for subtle decorative elements.
+Everything becomes fully static whenever reduced motion is requested.
 
 ### Accessibility and responsive behavior
 
-- Responsive from 320 px mobile through iPad, laptop, and 1440 px desktop.
+- Responsive from 320 px mobile through iPad, laptop, and 1440 px desktop. A
+  dedicated short-laptop breakpoint (`min-width: 1024px` and
+  `max-height: 760px`) protects the hero copy, wordmark, kaapi, and CTA.
 - Visible `:focus-visible` treatment and touch targets of at least 44 px.
 - Skip link, semantic headings/landmarks, descriptive media alternatives, and
   keyboard-safe menu navigation.
-- Mobile drawer traps focus, closes with Escape or at the desktop breakpoint,
-  locks background scroll, and returns focus to its trigger.
+- The mobile drawer is an `aria-modal` dialog with a dismissible backdrop. It
+  traps focus, makes page content inert and hidden from assistive technology
+  while open, locks background scroll, closes with Escape or at the desktop
+  breakpoint, and restores focus and document state on exit.
 - Videos expose play/pause and mute controls where relevant.
 - `prefers-reduced-motion` pauses hero/video autoplay, disables drift, steam,
   reveal, transition, and perspective effects, and leaves all content visible.
@@ -106,8 +119,11 @@ Final local verification:
 
 | Check | Result |
 | --- | --- |
-| Responsive browser matrix | **320×568, 390×667/844, 768×700, 1024×768, and 1440×900 passed** |
+| Responsive browser matrix | **9/9 passed** — 320×568, 390×667, 390×844, 768×700, 768×1024, 1024×700, 1024×768, 1280×800, and 1440×900 |
+| Production build | **Passed** — `npm run build` |
+| TypeScript | **Passed** — `npx tsc --noEmit` |
 | 21st inspection | **0 errors, 0 warnings** |
+| Final design/code review | **9.7/10** |
 | Dependency audit | **0 vulnerabilities** |
 
 The production static build completes successfully, and the page runs locally

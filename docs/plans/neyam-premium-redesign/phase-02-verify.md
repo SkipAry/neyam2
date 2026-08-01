@@ -113,7 +113,7 @@ Preserved from the completed pre-Golden-Morning verification cycle.
 
 Unchecked preflight/performance items are evidence gaps, not defects: this workspace is not an independently scoped Git repository, 200% zoom was not separately recorded, and slow-network plus anchored-refresh runs were not recorded.
 
-## Current verification record — Golden Morning
+## Prior verification record — initial Golden Morning
 
 - [x] Production build passed.
 - [x] 21st review completed with **0 errors, 0 warnings, and 22 informational suggestions**.
@@ -127,6 +127,37 @@ Unchecked preflight/performance items are evidence gaps, not defects: this works
 - [x] `npm audit` completed with 0 vulnerabilities.
 
 The 22 21st findings are informational suggestions, not errors or warnings. No current evidence was supplied for a new 200% zoom run, slow-network run, or anchored-refresh run, so those historical checkboxes remain open.
+
+## Final test matrix — Golden Morning Editorial
+
+| Viewport | Hero hierarchy | Page overflow | Accessibility/interactions | Result |
+|---|---|---|---|---|
+| 320×568 | Wordmark, kaapi, copy, CTA clear | None | Touch targets/reduced motion pass | Pass |
+| 390×667 | Wordmark, kaapi, copy, CTA clear | None | Touch targets/reduced motion pass | Pass |
+| 390×844 | Wordmark, kaapi, copy, CTA clear | None | Touch targets/reduced motion pass | Pass |
+| 768×700 | Short-height composition clear | None | Drawer/focus pass | Pass |
+| 768×1024 | Tablet composition clear | None | Drawer/focus pass | Pass |
+| 1024×700 | Dedicated short-laptop composition; wordmark/kaapi and copy/CTA clear | None | Keyboard/focus pass | Pass |
+| 1024×768 | Laptop composition clear | None | Keyboard/focus pass | Pass |
+| 1280×800 | Desktop composition clear | None | Keyboard/focus pass | Pass |
+| 1440×900 | Full desktop composition clear | None | Keyboard/focus pass | Pass |
+
+## Final verification record — Golden Morning Editorial
+
+- [x] Next.js 15.5.22 production build passed and exported **6/6 pages**.
+- [x] Standalone `npx tsc --noEmit` passed.
+- [x] 21st review inspected 26 files with **0 errors, 0 warnings, and 24 informational hardcoded-color suggestions**; no blocker.
+- [x] Final code review scored **9.7/10** with 0 critical findings.
+- [x] All nine viewport/height combinations passed with no horizontal overflow.
+- [x] The 1024×700 breakpoint kept wordmark/kaapi and copy/CTA collision-free with zero overflow.
+- [x] Drawer modal/focus/inert behavior and Escape handling passed.
+- [x] Touch targets and two-color focus visibility passed.
+- [x] Signature selector live announcements and pressed state passed.
+- [x] Native FAQ keyboard behavior passed.
+- [x] Reduced motion left content visible and disabled decorative depth, reveals, orbit, ticker, and transitions.
+- [x] Rendered output contains no phone/`tel:` link and no `neyam.in`.
+
+The historical 200% zoom, slow-network, and anchored-refresh boxes remain open because this final evidence did not include new runs for them.
 
 ## Launch content/config
 

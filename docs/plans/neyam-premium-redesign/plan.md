@@ -32,7 +32,7 @@ Deliver “Golden Morning”: a bold, light, conversion-led Next.js landing page
 - One dominant hero conversion CTA: Directions. Google rating remains proof, not a competing action.
 - One signature-food theatre with three accessible dish selectors.
 - Unboxed menu rows with real dish cutouts; no invented item prices.
-- Brass Philosophy section with monumental brand statements and owned imagery.
+- Parchment-deep Philosophy surface with brass accents, monumental editorial type, and owned imagery.
 - Monumental 5.0/46 Google proof with restaurant film, photography, and Instagram.
 - Finish with Visit and repeated Directions CTA.
 - Preserve parchment `#F5EDDC`, maroon `#71301F`, terracotta `#9A3714`, brass `#DEB13A`, ink `#2B1710`; Cormorant Garamond + Google Sans; stamp, Chittara, kolam, printed-menu motifs.
@@ -43,7 +43,7 @@ Deliver “Golden Morning”: a bold, light, conversion-led Next.js landing page
 
 Completed the original dark, split-cinematic conversion funnel and established centralized facts, static-export SEO, responsive behavior, accessibility, and pre-domain safeguards.
 
-### Iteration 2 — Golden Morning (current)
+### Iteration 2 — Golden Morning
 
 - [x] Replace the dark split hero with a light, logo-first composition.
 - [x] Replace the hero dose with a brass filter-kaapi cutout based on Neyam's real photograph; add orbit copy and motion-disciplined CSS 3D.
@@ -55,6 +55,16 @@ Completed the original dark, split-cinematic conversion funnel and established c
 - [x] Restyle Philosophy on a full brass field with monumental typography.
 - [x] Elevate Google proof to a monumental 5.0/46 treatment.
 - [x] Record the Golden Morning decisions and 21st references in `.21st/design.json`.
+
+### Iteration 3 — Golden Morning Editorial (current)
+
+- [x] Replace the hero text approximation with an accessible, hand-traced NEYAM vector wordmark.
+- [x] Refine the type hierarchy with editorial display faces, balanced headings, 11 px minimum microcopy, and stronger supporting-text contrast.
+- [x] Reduce hero pointer motion to restrained depth, slow decorative loops, and retain complete reduced-motion fallbacks.
+- [x] Add two-color focus visibility, accessible decorative semantics, live signature-dish announcements, and verified drawer/modal/inert behavior.
+- [x] Move Philosophy from a full brass field to a calmer parchment-deep surface with a brass medallion and ghost word.
+- [x] Add and verify a dedicated 1024×700 short-laptop hero composition.
+- [x] Verify nine viewport/height combinations, production export, standalone TypeScript, 21st review, and final code review.
 
 ## Phases
 
@@ -93,15 +103,17 @@ Progress: **Completed.** Implementation and QA passed. Launch-only content/confi
 - Review: 21st audit reported 0 errors and 0 warnings; final code review scored **9.6/10** with no critical issue.
 - Handoff: `http://localhost:3000` returned HTTP 200.
 
-## Current QA evidence — Golden Morning
+## Current QA evidence — Golden Morning Editorial
 
-- Production build passed.
-- 21st review: **0 errors, 0 warnings, 22 informational suggestions**.
-- Six responsive viewport/height combinations passed with no horizontal overflow or hero collisions.
-- Mobile drawer correctly focused its first link and closed with Escape.
+- Next.js 15.5.22 production build passed; static export generated **6/6 pages**.
+- Standalone `npx tsc --noEmit` passed.
+- 21st review inspected 26 files: **0 errors, 0 warnings, 24 informational hardcoded-color suggestions**, no blockers.
+- Final code review: **9.7/10**, 0 critical findings.
+- Matrix passed at 320×568, 390×667, 390×844, 768×700, 768×1024, 1024×700, 1024×768, 1280×800, and 1440×900.
+- The 1024×700 short-laptop layout keeps wordmark/kaapi and copy/CTA clear with zero overflow.
+- Drawer modal/focus/inert behavior, touch targets, live signature selector, FAQ, reduced motion, and overflow checks passed.
 - Rendered output contains no telephone link and no `neyam.in`.
-- `npm audit` reported 0 vulnerabilities.
-- Hero geometry passed at 320×568, 390×667, 390×844, 768×700, 1024×768, and 1440×900; NEYAM remains fully legible and the animated kaapi clears both copy and CTA.
+- Earlier `npm audit` reported 0 vulnerabilities.
 
 ## Launch content/config
 

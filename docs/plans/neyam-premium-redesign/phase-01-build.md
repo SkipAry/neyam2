@@ -28,9 +28,10 @@ One implementer owns each file during this phase to avoid overlapping edits.
 | Composition | Modify | `site/src/app/page.tsx` | new narrative order; remove duplicate sections |
 | Conversion UI | Modify | `site/src/components/Header.tsx` | light logo-first state, Directions emphasis, accessible drawer |
 | Conversion UI | Modify | `site/src/components/Hero.tsx` | Golden Morning wordmark, ghee sun, generated filter-kaapi 3D, single Directions CTA |
+| Conversion UI | Create | `site/src/components/neyam-wordmark.tsx` | accessible hand-traced vector reproduction of Neyam's custom lettering |
 | Food UI | Modify | `site/src/components/Signatures.tsx` | responsive signature-food theatre and accessible selectors |
 | Food UI | Modify | `site/src/components/Menu.tsx` | unboxed editorial menu rows and readable content |
-| Story UI | Create/modify | `site/src/components/Philosophy.tsx` | brass monumental narrative combining Story, Kaapi, and Community |
+| Story UI | Create/modify | `site/src/components/Philosophy.tsx` | parchment-deep editorial narrative with brass accents, Kaapi, and Community |
 | Proof UI | Create/modify | `site/src/components/Proof.tsx` | monumental 5.0/46 Google proof, owned film, imagery, and Instagram |
 | Conversion UI | Modify | `site/src/components/Visit.tsx` | address/hours/rating/action-led closing block |
 | Conversion UI | Modify | `site/src/components/Footer.tsx` | concise local NAP and verified links |
@@ -126,7 +127,7 @@ Preserved from the completed “The Ghee House” build. Golden Morning supersed
 - External links use safe attributes where new tabs are used.
 - JSON-LD remains build-time data only; no unsanitized runtime injection.
 
-## Golden Morning redesign iteration
+## Golden Morning redesign iteration — initial
 
 ### Hero
 
@@ -157,6 +158,40 @@ Preserved from the completed “The Ghee House” build. Golden Morning supersed
 - [x] Mobile drawer focus and Escape behavior pass.
 - [x] Rendered output contains no `tel:` link and no `neyam.in`.
 - [x] Dependency audit reports 0 vulnerabilities.
+
+## Golden Morning Editorial final polish
+
+### Accessibility
+
+- [x] Use a two-color `:focus-visible` treatment that remains visible on both light and dark brand surfaces.
+- [x] Give the vector wordmark an accessible name and retain screen-reader local-intent hero copy.
+- [x] Mark ticker and decorative hero artwork appropriately so they do not duplicate content for assistive technology.
+- [x] Announce signature-dish changes through an atomic polite live region while retaining `aria-pressed` selectors.
+- [x] Preserve at least 44 px touch targets and verify drawer modal, focus, inert-background, Escape, and focus-return behavior.
+- [x] Keep FAQ interaction native and keyboard accessible.
+
+### Typography and surfaces
+
+- [x] Replace the hero's font approximation with `NeyamWordmark`, a crisp hand-traced SVG matching the custom brand lettering.
+- [x] Apply the editorial display face to major food/story headings while retaining sans-serif utility labels and proof numerals.
+- [x] Raise microcopy to 11 px where needed, balance headings, and strengthen muted-copy contrast.
+- [x] Move Philosophy from the initial full-brass field to parchment-deep, retaining brass through the medallion and oversized ghost word.
+
+### Motion and short-height behavior
+
+- [x] Reduce pointer response to restrained hero rotation/translation and keep touch input static.
+- [x] Slow orbit/ticker loops and use short settle transitions without scroll hijacking.
+- [x] Disable hero depth, dish animation, reveal motion, ticker/orbit motion, and transitions under `prefers-reduced-motion`.
+- [x] Add the 1024×700 short-laptop composition through the desktop short-height media query: compact kaapi stage, clear wordmark, hidden supporting copy, and unobstructed CTA.
+
+### Final acceptance evidence
+
+- [x] Next.js 15.5.22 production build and **6/6** static pages pass.
+- [x] Standalone `npx tsc --noEmit` passes.
+- [x] Nine viewport/height combinations pass with no overflow or hero collision.
+- [x] At 1024×700, wordmark/kaapi and copy/CTA remain clear with zero overflow.
+- [x] 21st review: 26 files, 0 errors, 0 warnings, 24 informational hardcoded-color suggestions, no blockers.
+- [x] Final code review: 9.7/10, 0 critical findings.
 
 ## Iteration 1 reconciliation history
 

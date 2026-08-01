@@ -15,9 +15,8 @@
       "ink": "#2B1710"
     },
     "typography": {
-      "brandStatements": "Google Sans Variable",
-      "editorialVoice": "Cormorant Garamond Variable",
-      "body": "Google Sans Variable"
+      "displayAndEditorial": "Cormorant Garamond Variable",
+      "bodyFactsNavigationAndControls": "Google Sans Variable"
     },
     "motifs": [
       "ghee sun",
@@ -36,7 +35,7 @@
     "Keep the application compatible with Next.js static export",
     "Avoid generic SaaS cards, glass-heavy styling, and decorative gradients",
     "Do not publish a phone number until the restaurant supplies one",
-    "Do not use neyam.in or emit indexable metadata until an owned domain is confirmed"
+    "Do not emit indexable metadata until a cafe-owned production domain is confirmed"
   ],
   "decisions": [
     {
@@ -76,6 +75,16 @@
         "Existing verified Google Business listing"
       ],
       "rationale": "Balances brand storytelling with a clear path from appetite to an in-person visit."
+    },
+    {
+      "id": "golden-morning-editorial-polish",
+      "choice": "Finish Golden Morning with a disciplined serif/sans hierarchy, WCAG AA-safe text and control contrast, a calmer parchment Philosophy surface, finite decorative motion, a dedicated short-laptop hero composition, and a modal mobile drawer that makes the page inert while open.",
+      "references": [
+        "21st-ui-build: project-aware editorial composition and interaction review",
+        "UI/UX Pro Max: hierarchy, contrast, responsive height, motion, and modal accessibility guidance",
+        "Nine-viewport browser verification from 320×568 through 1440×900"
+      ],
+      "rationale": "The polish improves reading rhythm and conversion clarity while protecting keyboard, assistive-technology, reduced-motion, short-phone, tablet, and short-laptop experiences."
     }
   ]
 }
