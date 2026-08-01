@@ -69,6 +69,8 @@ Completed the original dark, split-cinematic conversion funnel and established c
 - [x] Use the fractional-safe 700.98 px short-height threshold so 700 px phone/tablet canvases reliably receive the compact hero treatment.
 - [x] Add and verify a dedicated 1024×700 short-laptop hero composition.
 - [x] Verify fifteen viewport/height combinations, production export, standalone TypeScript, 21st review, and final code review.
+- [x] Restore the kaapi orbit on mobile with the exact approved copy, tighter 114% geometry, 56-second rotation, and a visible static reduced-motion state.
+- [x] Pass a focused 11-viewport orbit regression matrix alongside the broader 15-viewport redesign matrix.
 
 ## Phases
 
@@ -118,6 +120,9 @@ Progress: **Completed.** Implementation and QA passed. Launch-only content/confi
 - The header is 68 px below 640 px and 76 px above it; anchor clearance is 68 px below 640 px, 76 px through 767.98 px, and the preserved 88 px from 768 px. The quick dock remains phone-only.
 - Short phone/tablet layouts use `max-height: 700.98px`, avoiding fractional viewport rounding gaps around the tested 700 px height.
 - The 1024×700 short-laptop layout keeps wordmark/kaapi and copy/CTA clear with zero overflow.
+- Focused orbit regression passed at 320×568, 373×700, 390×844, 430×932, 640×700, 640×900, 767×700, 767×900, 768×1024, 1024×768, and 1440×900.
+- Every focused viewport showed “✦ Authentic Bengaluru dosa ✦ Now serving Pune ✦ Est. 2026 ✦” with no overlap or overflow; minimum mobile clearances were 7.1 px from the wordmark, 15.2 px from the headline, and 103.4 px from the CTA.
+- Reduced motion keeps the orbit visible and static.
 - Drawer modal/focus/inert behavior, touch targets, live signature selector, FAQ, reduced motion, and overflow checks passed.
 - Rendered output contains no telephone link and no `neyam.in`.
 - Earlier `npm audit` reported 0 vulnerabilities.

@@ -15,7 +15,8 @@ The seven-section journey is intentionally short:
 
 1. **Hero** — a light, logo-first brand canvas with an unobstructed wordmark, a
    brass filter-kaapi cutout derived from Neyam's real photograph, restrained
-   pointer depth, Google proof, and one dominant directions action.
+   pointer depth, circular Bengaluru-to-Pune orbit, Google proof, and one
+   dominant directions action.
 2. **Signatures** — one large dish theatre with three accessible selectors
    instead of a grid of repeated cards.
 3. **Menu** — unboxed numbered categories with food cutouts and large,
@@ -95,6 +96,12 @@ restrained CSS perspective without scroll hijacking. Entrance reveals are slow
 and finite, while continuous motion is reserved for subtle decorative elements.
 Everything becomes fully static whenever reduced motion is requested.
 
+The circular kaapi orbit remains visible at every supported width with the
+exact message `✦ Authentic Bengaluru dosa ✦ Now serving Pune ✦ Est. 2026 ✦`.
+From 320–767.98 px it uses tighter 114% geometry and a calm 56-second rotation;
+from 768 px upward it retains the original 120% geometry and 42-second rotation.
+Under `prefers-reduced-motion` the full ring stays visible but does not rotate.
+
 ### Accessibility and responsive behavior
 
 - Responsive from 320 px mobile through iPad, laptop, and 1440 px desktop. A
@@ -110,6 +117,7 @@ Everything becomes fully static whenever reduced motion is requested.
 - Videos expose play/pause and mute controls where relevant.
 - `prefers-reduced-motion` pauses hero/video autoplay, disables drift, steam,
   reveal, transition, and perspective effects, and leaves all content visible.
+  The decorative kaapi orbit remains present as a static ring.
 
 ---
 
@@ -119,11 +127,12 @@ Final local verification:
 
 | Check | Result |
 | --- | --- |
-| Responsive browser matrix | **9/9 passed** — 320×568, 390×667, 390×844, 768×700, 768×1024, 1024×700, 1024×768, 1280×800, and 1440×900 |
+| Responsive browser matrix | **15/15 passed** across phone, narrow tablet, iPad, laptop, and desktop |
+| Focused orbit matrix | **11/11 viewport checks passed** from 320×568 through 1440×900 |
 | Production build | **Passed** — `npm run build` |
 | TypeScript | **Passed** — `npx tsc --noEmit` |
 | 21st inspection | **0 errors, 0 warnings** |
-| Final design/code review | **9.7/10** |
+| Final design/code review | **9.8/10** |
 | Dependency audit | **0 vulnerabilities** |
 
 The production static build completes successfully, and the page runs locally

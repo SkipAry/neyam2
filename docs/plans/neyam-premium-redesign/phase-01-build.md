@@ -181,6 +181,8 @@ Preserved from the completed “The Ghee House” build. Golden Morning supersed
 
 - [x] Reduce pointer response to restrained hero rotation/translation and keep touch input static.
 - [x] Slow orbit/ticker loops and use short settle transitions without scroll hijacking.
+- [x] Keep the orbit visible through 767.98 px using 114% geometry and a 56-second rotation.
+- [x] Use the exact approved orbit copy: “✦ Authentic Bengaluru dosa ✦ Now serving Pune ✦ Est. 2026 ✦”.
 - [x] Disable hero depth, dish animation, reveal motion, ticker/orbit motion, and transitions under `prefers-reduced-motion`.
 - [x] Add the 1024×700 short-laptop composition through the desktop short-height media query: compact kaapi stage, clear wordmark, hidden supporting copy, and unobstructed CTA.
 
@@ -198,6 +200,10 @@ Preserved from the completed “The Ghee House” build. Golden Morning supersed
 - [x] Next.js 15.5.22 production build and **6/6** static pages pass.
 - [x] Standalone `npx tsc --noEmit` passes.
 - [x] Fifteen viewport/height combinations pass with no overflow or hero collision.
+- [x] A focused 11-viewport orbit regression passes alongside the broader redesign matrix.
+- [x] Orbit remains visible with exact copy and no overlap/overflow at 320×568, 373×700, 390×844, 430×932, 640×700, 640×900, 767×700, 767×900, 768×1024, 1024×768, and 1440×900.
+- [x] Minimum mobile orbit clearances measure 7.1 px to the wordmark, 15.2 px to the headline, and 103.4 px to the CTA.
+- [x] Under reduced motion, the orbit remains visible but static.
 - [x] Phone normal-flow and 768 px tablet absolute-layout modes preserve visual order, touch targets, and signature live-region/`aria-pressed` behavior.
 - [x] At 1024×700, wordmark/kaapi and copy/CTA remain clear with zero overflow.
 - [x] 21st review: 26 files, 0 errors, 0 warnings, 24 informational hardcoded-color suggestions, no blockers.

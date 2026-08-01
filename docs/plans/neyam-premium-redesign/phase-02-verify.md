@@ -128,7 +128,7 @@ Unchecked preflight/performance items are evidence gaps, not defects: this works
 
 The 22 21st findings are informational suggestions, not errors or warnings. No current evidence was supplied for a new 200% zoom run, slow-network run, or anchored-refresh run, so those historical checkboxes remain open.
 
-## Final test matrix — Golden Morning Editorial
+## Representative full-redesign test matrix — Golden Morning Editorial
 
 | Viewport | Hero hierarchy | Page overflow | Accessibility/interactions | Result |
 |---|---|---|---|---|
@@ -142,6 +142,24 @@ The 22 21st findings are informational suggestions, not errors or warnings. No c
 | 1280×800 | Desktop composition clear | None | Keyboard/focus pass | Pass |
 | 1440×900 | Full desktop composition clear | None | Keyboard/focus pass | Pass |
 
+The complete full-redesign regression covered fifteen viewport/height combinations. The table above retains representative phone, tablet, laptop, and desktop evidence.
+
+## Focused mobile-orbit regression matrix
+
+| Viewport | Orbit | Copy | Overlap/overflow | Result |
+|---|---|---|---|---|
+| 320×568 | Visible | Exact approved copy | None | Pass |
+| 373×700 | Visible | Exact approved copy | None | Pass |
+| 390×844 | Visible | Exact approved copy | None | Pass |
+| 430×932 | Visible | Exact approved copy | None | Pass |
+| 640×700 | Visible | Exact approved copy | None | Pass |
+| 640×900 | Visible | Exact approved copy | None | Pass |
+| 767×700 | Visible | Exact approved copy | None | Pass |
+| 767×900 | Visible | Exact approved copy | None | Pass |
+| 768×1024 | Visible | Exact approved copy | None | Pass |
+| 1024×768 | Visible | Exact approved copy | None | Pass |
+| 1440×900 | Visible | Exact approved copy | None | Pass |
+
 ## Final verification record — Golden Morning Editorial
 
 - [x] Next.js 15.5.22 production build passed and exported **6/6 pages**.
@@ -149,6 +167,10 @@ The 22 21st findings are informational suggestions, not errors or warnings. No c
 - [x] 21st review inspected 26 files with **0 errors, 0 warnings, and 24 informational hardcoded-color suggestions**; no blocker.
 - [x] Final code review scored **9.8/10** with 0 critical findings.
 - [x] All fifteen viewport/height combinations passed with no horizontal overflow.
+- [x] Focused orbit regression passed all eleven approved viewport/height combinations.
+- [x] Orbit copy is exactly “✦ Authentic Bengaluru dosa ✦ Now serving Pune ✦ Est. 2026 ✦” at every focused viewport.
+- [x] Mobile orbit minimum clearances are 7.1 px to the wordmark, 15.2 px to the headline, and 103.4 px to the CTA.
+- [x] The orbit remains visible and static under reduced motion.
 - [x] Hero and Signatures remain in normal document flow through 767.98 px and switch to the layered absolute composition at 768 px without changing semantic or keyboard order.
 - [x] Header/anchor clearance passed at 68 px below 640 px, 76 px through 767.98 px, and the preserved 76 px header/88 px anchor clearance from 768 px; the quick dock is restricted below 640 px.
 - [x] The fractional-safe `max-height: 700.98px` compact rules cover nominal 700 px phone/tablet canvases.
