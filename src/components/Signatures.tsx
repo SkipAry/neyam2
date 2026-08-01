@@ -32,20 +32,20 @@ export default function Signatures() {
 
         <Reveal className="mt-10 md:mt-14">
           <div className="signature-theatre relative min-h-[35rem] overflow-hidden rounded-[2rem] bg-parchment-light text-maroon-deep sm:min-h-[42rem] lg:min-h-[46rem]">
-            <div className="absolute inset-x-0 top-5 flex items-center justify-between px-6 text-[11px] font-semibold uppercase tracking-[0.22em] text-terracotta-ink sm:px-9">
+            <div className="signature-meta absolute inset-x-0 top-5 flex items-center justify-between px-6 text-[11px] font-semibold uppercase tracking-[0.22em] text-terracotta-ink sm:px-9">
               <span>Signature 0{active + 1}</span>
-              <span>{site.priceRange} typical spend</span>
+              <span>{site.priceRange} per person</span>
             </div>
 
             <p
               key={`type-${dish.name}`}
               aria-hidden="true"
-              className="absolute left-1/2 top-[16%] w-[120%] -translate-x-1/2 text-center font-display text-[clamp(4.2rem,12vw,11rem)] font-semibold uppercase leading-[0.72] tracking-[-0.065em] text-maroon/[0.09] motion-safe:animate-[dish-type_.65s_cubic-bezier(.16,1,.3,1)]"
+              className="signature-type absolute left-1/2 top-[16%] w-[120%] -translate-x-1/2 text-center font-display text-[clamp(4.2rem,12vw,11rem)] font-semibold uppercase leading-[0.72] tracking-[-0.065em] text-maroon/[0.09] motion-safe:animate-[dish-type_.65s_cubic-bezier(.16,1,.3,1)]"
             >
               {dish.name}
             </p>
 
-            <div className="dish-stage group/dish absolute left-1/2 top-[17%] h-[58%] w-[94%] -translate-x-1/2 sm:top-[13%] sm:h-[68%] lg:w-[72%]">
+            <div className="signature-media dish-stage group/dish absolute left-1/2 top-[17%] h-[58%] w-[94%] -translate-x-1/2 sm:top-[13%] sm:h-[68%] lg:w-[72%]">
               <div className="absolute bottom-[7%] left-1/2 h-12 w-[62%] -translate-x-1/2 rounded-[50%] bg-maroon/20 blur-2xl" />
               <Image
                 key={dish.image}
@@ -57,8 +57,8 @@ export default function Signatures() {
               />
             </div>
 
-            <div className="absolute inset-x-5 bottom-5 grid gap-5 border-t border-maroon/15 pt-5 sm:inset-x-8 sm:bottom-8 md:grid-cols-[1fr_auto] md:items-end">
-              <div aria-live="polite" aria-atomic="true">
+            <div className="signature-content absolute inset-x-5 bottom-5 grid gap-5 border-t border-maroon/15 pt-5 sm:inset-x-8 sm:bottom-8 md:grid-cols-[1fr_auto] md:items-end">
+              <div className="signature-copy" aria-live="polite" aria-atomic="true">
                 <h3 className="font-display text-[clamp(1.8rem,4vw,3.4rem)] font-semibold leading-none text-maroon">
                   {dish.name}
                 </h3>
@@ -66,7 +66,7 @@ export default function Signatures() {
               </div>
 
               <div
-                className="grid grid-cols-3 gap-2"
+                className="signature-selectors grid grid-cols-3 gap-2"
                 role="group"
                 aria-label="Choose a signature dish"
               >

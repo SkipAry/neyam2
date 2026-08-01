@@ -99,21 +99,21 @@ export default function Header() {
           : "border-transparent bg-parchment-light/70 backdrop-blur-[2px]"
       }`}
     >
-      <div className="relative z-20 mx-auto flex h-[4.75rem] max-w-site items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="relative z-20 mx-auto flex h-[4.25rem] max-w-site items-center justify-between px-4 sm:h-[4.75rem] sm:px-6 lg:px-8">
         <a href="#home" className="flex min-h-[44px] items-center gap-3" aria-label="Neyam — home">
           <Image
             src="/brand/mark-maroon.png"
             alt=""
             width={30}
             height={42}
-            className="h-10 w-auto"
+            className="h-9 w-auto sm:h-10"
             priority
           />
           <span className="leading-none">
             <span className={`block font-display text-xl font-semibold tracking-[0.2em] ${foreground}`}>
               NEYAM
             </span>
-            <span className={`mt-1 block text-[11px] font-semibold uppercase tracking-caps ${muted}`}>
+            <span className={`mt-1 block text-[10px] font-semibold uppercase tracking-[0.16em] sm:text-[11px] sm:tracking-caps ${muted}`}>
               Heritage dose &amp; kaapi
             </span>
           </span>
@@ -151,7 +151,7 @@ export default function Header() {
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={open ? "Close menu" : "Open menu"}
-          className="flex h-12 w-12 cursor-pointer flex-col items-center justify-center gap-[5px] rounded-full lg:hidden"
+          className="flex h-11 w-11 cursor-pointer flex-col items-center justify-center gap-[5px] rounded-full sm:h-12 sm:w-12 lg:hidden"
         >
           <span className={`h-[2px] w-6 transition ${line} ${open ? "translate-y-[7px] rotate-45" : ""}`} />
           <span className={`h-[2px] w-6 transition ${line} ${open ? "opacity-0" : ""}`} />
@@ -162,7 +162,7 @@ export default function Header() {
       <div
         aria-hidden="true"
         onClick={() => setOpen(false)}
-        className={`fixed inset-0 top-[4.75rem] z-0 bg-ink/45 backdrop-blur-[2px] transition-opacity duration-200 lg:hidden ${
+        className={`fixed inset-0 top-[4.25rem] z-0 bg-ink/45 backdrop-blur-[2px] transition-opacity duration-200 sm:top-[4.75rem] lg:hidden ${
           open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}
       />
@@ -173,7 +173,7 @@ export default function Header() {
         role="dialog"
         aria-modal="true"
         aria-label="Main menu"
-        className="relative z-10 mx-3 max-h-[calc(100svh-6.25rem)] overflow-y-auto rounded-[1.5rem] border border-maroon/15 bg-parchment px-4 pb-6 shadow-[0_24px_70px_rgba(43,23,16,0.28)] sm:mx-5 sm:px-6 lg:hidden"
+        className="relative z-10 mx-3 max-h-[calc(100svh-5.75rem)] overflow-y-auto rounded-[1.5rem] border border-maroon/15 bg-parchment px-4 pb-6 shadow-[0_24px_70px_rgba(43,23,16,0.28)] sm:mx-5 sm:max-h-[calc(100svh-6.25rem)] sm:px-6 lg:hidden"
       >
         <p className="border-b border-maroon/10 py-4 text-[11px] font-semibold uppercase tracking-caps text-terracotta-ink">
           Model Colony, Pune · Daily 8 AM–10 PM

@@ -43,13 +43,13 @@ export default function Hero() {
           top of the wordmark eyebrow rather than pushing it down. Below 360px
           the two labels can't hold 0.2em tracking on one line, so the tracking
           tightens there instead of letting them wrap. */}
-      <div className="absolute inset-x-0 top-[5.4rem] z-20 flex items-center justify-between whitespace-nowrap px-4 text-[11px] font-semibold uppercase tracking-[0.04em] text-maroon/80 xs:tracking-[0.2em] sm:px-7 lg:px-10">
+      <div className="hero-meta absolute inset-x-0 top-[5.4rem] z-20 flex items-center justify-between whitespace-nowrap px-4 text-[11px] font-semibold uppercase tracking-[0.04em] text-maroon/80 xs:tracking-[0.2em] sm:px-7 lg:px-10">
         <span>Model Colony · Pune</span>
         <span className="hidden sm:inline">Daily · 8 AM–10 PM</span>
         <span>100% vegetarian</span>
       </div>
 
-      <div className="pointer-events-none absolute inset-x-0 top-[18%] z-20 text-center sm:top-[18%]">
+      <div className="hero-brand pointer-events-none absolute inset-x-0 top-[18%] z-20 text-center sm:top-[18%]">
         <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.32em] text-terracotta-ink sm:text-xs">
           Heritage Bangalore breakfast
         </p>
@@ -106,7 +106,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="absolute inset-x-0 bottom-[4.6rem] z-20 mx-auto grid max-w-site items-end gap-5 px-4 sm:px-7 md:grid-cols-[1fr_auto] lg:px-8">
+      <div className="hero-conversion absolute inset-x-0 bottom-[4.6rem] z-20 mx-auto grid max-w-site items-end gap-5 px-4 sm:px-7 md:grid-cols-[1fr_auto] lg:px-8">
         <div className="hero-copy-block max-w-[31rem]">
           <p className="hero-copy-headline font-display text-[clamp(1.55rem,2.7vw,2.45rem)] font-semibold leading-[1.02] tracking-[-0.025em]">
             Bringing the authentic flavors of Bengaluru&apos;s breakfasts to the heart of Pune
@@ -116,7 +116,7 @@ export default function Hero() {
           </p>
         </div>
 
-        <div className="flex items-center gap-3 md:justify-end">
+        <div className="hero-actions flex items-center gap-3 md:justify-end">
           {site.googleRating != null ? (
             <a
               href={site.googleListing}

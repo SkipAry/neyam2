@@ -294,32 +294,186 @@ body.mobile-nav-open .mobile-quick-actions {
   opacity: 0;
 }
 
-@media (max-width: 639px) {
+@media (max-width: 767.98px) {
+  html {
+    scroll-padding-top: 4.25rem;
+  }
+
   /* Horizontal rails clip their cross axis; keep food cutouts fully visible. */
   .signature-drift {
     translate: none !important;
+  }
+
+  .hero-golden {
+    min-height: auto;
+    padding-top: 4.25rem;
+  }
+
+  .hero-meta {
+    position: relative !important;
+    inset: auto !important;
+    top: auto !important;
+    margin-top: 1rem;
+  }
+
+  .hero-brand {
+    position: relative !important;
+    inset: auto !important;
+    top: auto !important;
+    margin-top: 3.25rem;
+  }
+
+  .hero-stage {
+    position: relative !important;
+    inset: auto !important;
+    top: auto !important;
+    left: auto !important;
+    width: min(62vw, 15.5rem);
+    margin: 1.25rem auto 0;
+    transform: none !important;
+  }
+
+  .hero-orbit {
+    display: none;
+  }
+
+  .hero-stamp {
+    right: -8%;
+    top: 32%;
+    width: 4.5rem;
+    height: 4.5rem;
+    font-size: 9px;
+  }
+
+  .hero-conversion {
+    position: relative !important;
+    inset: auto !important;
+    bottom: auto !important;
+    display: block;
+    margin-top: 1.75rem;
+    padding-inline: 1rem;
+  }
+
+  .hero-copy-block {
+    max-width: 22rem;
+  }
+
+  .hero-copy-headline {
+    font-size: clamp(1.65rem, 7.2vw, 2rem);
+    line-height: 0.98;
+  }
+
+  .hero-actions {
+    margin-top: 1.25rem;
+  }
+
+  .hero-ticker {
+    position: relative !important;
+    inset: auto !important;
+    bottom: auto !important;
+    margin-top: 1.75rem;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 767.98px) {
+  html {
+    scroll-padding-top: 4.75rem;
+  }
+
+  .hero-golden {
+    padding-top: 4.75rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  #signatures {
+    padding-bottom: 7rem;
+  }
+
+  .signature-theatre {
+    display: flex;
+    min-height: 0 !important;
+    flex-direction: column;
+    padding: 1.25rem;
+  }
+
+  .signature-meta {
+    position: static !important;
+    inset: auto !important;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0 !important;
+    line-height: 1.4;
+  }
+
+  .signature-meta > :last-child {
+    max-width: 8.5rem;
+    text-align: right;
+  }
+
+  .signature-type {
+    display: none;
+  }
+
+  .signature-media {
+    position: relative !important;
+    inset: auto !important;
+    top: auto !important;
+    left: auto !important;
+    width: min(100%, 20rem) !important;
+    height: auto !important;
+    aspect-ratio: 1;
+    margin: 1rem auto 0;
+    transform: none !important;
+  }
+
+  .signature-content {
+    position: static !important;
+    inset: auto !important;
+    display: grid;
+    gap: 1.25rem;
+    margin-top: 0.75rem;
+    padding-top: 1.25rem;
+  }
+
+  .signature-copy h3 {
+    font-size: clamp(2rem, 10vw, 2.6rem);
+    line-height: 0.95;
+  }
+
+  .signature-copy p {
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .signature-selectors {
+    width: 100%;
+  }
+
+  .signature-selectors button {
+    width: 100%;
   }
 }
 
 /* Preserve the full hero story on shorter laptop and phone canvases.
    The kaapi remains the focal point without competing with the conversion copy. */
-@media (max-width: 639px) and (max-height: 700px) {
+@media (max-width: 767.98px) and (max-height: 700.98px) {
   .hero-stage {
-    top: 33% !important;
-    width: min(52vw, 26vh);
+    top: auto !important;
+    width: min(56vw, 13.5rem);
   }
 
   .hero-copy-headline {
-    font-size: clamp(1.15rem, 4vw, 1.45rem);
-    line-height: 1.02;
+    font-size: clamp(1.45rem, 6.5vw, 1.75rem);
+    line-height: 0.98;
   }
 
   .hero-supporting-copy {
-    display: none;
+    display: none !important;
   }
 }
 
-@media (min-width: 640px) and (max-width: 1023px) and (max-height: 700px) {
+@media (min-width: 768px) and (max-width: 1023px) and (max-height: 700.98px) {
   .hero-stage {
     top: 32% !important;
     width: min(40vw, 31vh);
@@ -331,7 +485,7 @@ body.mobile-nav-open .mobile-quick-actions {
   }
 
   .hero-supporting-copy {
-    display: none;
+    display: none !important;
   }
 }
 
@@ -348,7 +502,7 @@ body.mobile-nav-open .mobile-quick-actions {
   }
 
   .hero-supporting-copy {
-    display: none;
+    display: none !important;
   }
 }
 
@@ -372,7 +526,7 @@ body.mobile-nav-open .mobile-quick-actions {
   }
 }
 
-@media (max-width: 639px) and (max-height: 700px) {
+@media (max-width: 767.98px) and (max-height: 700.98px) {
   .hero-facts-main {
     display: none;
   }

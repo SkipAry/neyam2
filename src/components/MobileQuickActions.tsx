@@ -64,7 +64,7 @@ export default function MobileQuickActions() {
       ref={navRef}
       aria-label="Quick actions"
       aria-hidden={!active}
-      className={`mobile-quick-actions fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-40 mx-auto grid max-w-sm grid-cols-2 gap-1.5 rounded-[1.35rem] border border-maroon/20 bg-parchment-light/95 p-1.5 shadow-[0_16px_38px_rgba(43,23,16,0.28)] backdrop-blur-md transition duration-300 ease-settle md:hidden motion-reduce:transition-none ${
+      className={`mobile-quick-actions fixed inset-x-4 bottom-[max(0.5rem,env(safe-area-inset-bottom))] z-40 mx-auto grid max-w-sm grid-cols-[0.8fr_1.2fr] gap-1 rounded-[1.1rem] border border-maroon/15 bg-parchment-light/95 p-1 shadow-[0_12px_28px_rgba(43,23,16,0.22)] backdrop-blur-md transition duration-300 ease-settle sm:hidden motion-reduce:transition-none ${
         active
           ? "translate-y-0 opacity-100"
           : "pointer-events-none translate-y-5 opacity-0"
@@ -74,7 +74,7 @@ export default function MobileQuickActions() {
         href="#menu"
         data-cta="mobile-dock-menu"
         tabIndex={active ? 0 : -1}
-        className="inline-flex min-h-[50px] items-center justify-center gap-2 rounded-[1rem] px-4 text-sm font-semibold text-maroon-deep transition-colors hover:bg-parchment"
+        className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-[0.85rem] px-3 text-sm font-semibold text-maroon-deep transition-colors hover:bg-parchment sm:min-h-[50px] sm:rounded-[1rem] sm:px-4"
       >
         <svg
           viewBox="0 0 24 24"
@@ -94,7 +94,7 @@ export default function MobileQuickActions() {
         rel="noopener noreferrer"
         data-cta="mobile-dock-directions"
         tabIndex={active ? 0 : -1}
-        className="inline-flex min-h-[50px] items-center justify-center gap-2 rounded-[1rem] bg-maroon px-4 text-sm font-semibold text-parchment-light transition-colors hover:bg-maroon-deep"
+        className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-[0.85rem] bg-maroon px-3 text-sm font-semibold text-parchment-light transition-colors hover:bg-maroon-deep sm:min-h-[50px] sm:rounded-[1rem] sm:px-4"
       >
         <svg
           viewBox="0 0 24 24"
