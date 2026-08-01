@@ -1,0 +1,20 @@
+# Netlify build settings.
+#
+# The site is a fully static Next.js export (`output: "export"` in
+# next.config.ts), so the build emits a plain `out/` folder and Netlify only
+# has to serve those files — no SSR adapter or serverless functions involved.
+#
+# Keeping this in the repo rather than the Netlify UI means the build is
+# reproducible and reviewable; UI settings drift silently.
+#
+# Note: `out/404.html` is produced by the export and Netlify serves it for
+# unmatched routes automatically, so no redirect rules are needed. Directory
+# URLs already resolve because next.config.ts sets `trailingSlash: true`.
+
+[build]
+  command = "npm run build"
+  publish = "out"
+
+[build.environment]
+  # Pinned so a Netlify default bump can't change the build out from under us.
+  NODE_VERSION = "22"
