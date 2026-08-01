@@ -27,6 +27,15 @@ export default function Header() {
   useEffect(() => {
     if (!open) return;
     const previous = document.body.style.overflow;
+    const outside = [
+      document.querySelector<HTMLElement>("main"),
+      document.querySelector<HTMLElement>("footer"),
+    ].filter((node): node is HTMLElement => node != null);
+    const outsideState = outside.map((node) => ({
+      node,
+      inert: node.inert,
+      ariaHidden: node.getAttribute("aria-hidden"),
+    }));
     const desktop = window.matchMedia("(min-width: 1024px)");
     const panel = document.getElementById("mobile-nav");
     const focusFrame = requestAnimationFrame(() => firstLinkRef.current?.focus());
@@ -55,6 +64,10 @@ export default function Header() {
 
     document.body.style.overflow = "hidden";
     document.body.classList.add("mobile-nav-open");
+    outside.forEach((node) => {
+      node.inert = true;
+      node.setAttribute("aria-hidden", "true");
+    });
     desktop.addEventListener("change", closeOnDesktop);
     document.addEventListener("keydown", handleKey);
 
@@ -64,6 +77,11 @@ export default function Header() {
       document.removeEventListener("keydown", handleKey);
       document.body.style.overflow = previous;
       document.body.classList.remove("mobile-nav-open");
+      outsideState.forEach(({ node, inert, ariaHidden }) => {
+        node.inert = inert;
+        if (ariaHidden == null) node.removeAttribute("aria-hidden");
+        else node.setAttribute("aria-hidden", ariaHidden);
+      });
       if (panel?.contains(document.activeElement)) toggleRef.current?.focus();
     };
   }, [open]);
@@ -81,7 +99,7 @@ export default function Header() {
           : "border-transparent bg-parchment-light/70 backdrop-blur-[2px]"
       }`}
     >
-      <div className="mx-auto flex h-[4.75rem] max-w-site items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="relative z-20 mx-auto flex h-[4.75rem] max-w-site items-center justify-between px-4 sm:px-6 lg:px-8">
         <a href="#home" className="flex min-h-[44px] items-center gap-3" aria-label="Neyam — home">
           <Image
             src="/brand/mark-maroon.png"
@@ -106,7 +124,7 @@ export default function Header() {
             <a
               key={link.href}
               href={link.href}
-              className={`inline-flex min-h-[44px] items-center rounded-full px-4 text-sm font-medium transition-colors hover:bg-parchment/10 ${foreground}`}
+              className={`inline-flex min-h-[44px] items-center rounded-full px-4 text-sm font-medium transition-colors duration-200 hover:bg-maroon/[0.07] ${foreground}`}
             >
               {link.label}
             </a>
@@ -116,7 +134,7 @@ export default function Header() {
             target="_blank"
             rel="noopener noreferrer"
             data-cta="header-directions"
-            className={`ml-2 inline-flex min-h-[48px] items-center gap-2 rounded-full px-6 text-sm font-semibold transition duration-300 hover:-translate-y-0.5 ${
+            className={`ml-2 inline-flex min-h-[48px] items-center gap-2 rounded-full px-6 text-sm font-semibold transition duration-200 hover:-translate-y-0.5 ${
               opaque
                 ? "bg-maroon text-parchment-light hover:bg-maroon-deep"
                 : "border border-maroon/25 bg-parchment-light/55 text-maroon-deep hover:bg-parchment-light"
@@ -142,9 +160,20 @@ export default function Header() {
       </div>
 
       <div
+        aria-hidden="true"
+        onClick={() => setOpen(false)}
+        className={`fixed inset-0 top-[4.75rem] z-0 bg-ink/45 backdrop-blur-[2px] transition-opacity duration-200 lg:hidden ${
+          open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+        }`}
+      />
+
+      <div
         id="mobile-nav"
         hidden={!open}
-        className="max-h-[calc(100svh-4.75rem)] overflow-y-auto border-t border-maroon/15 bg-parchment px-4 pb-8 sm:px-6 lg:hidden"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Main menu"
+        className="relative z-10 mx-3 max-h-[calc(100svh-6.25rem)] overflow-y-auto rounded-[1.5rem] border border-maroon/15 bg-parchment px-4 pb-6 shadow-[0_24px_70px_rgba(43,23,16,0.28)] sm:mx-5 sm:px-6 lg:hidden"
       >
         <p className="border-b border-maroon/10 py-4 text-[11px] font-semibold uppercase tracking-caps text-terracotta-ink">
           Model Colony, Pune · Daily 8 AM–10 PM

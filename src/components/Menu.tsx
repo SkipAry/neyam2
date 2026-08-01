@@ -11,7 +11,7 @@ export default function Menu() {
       <div className="relative mx-auto max-w-site px-4 sm:px-6 lg:px-8">
         <Reveal className="text-center">
           <p className="eyebrow">From the griddle &amp; the filter</p>
-          <h2 className="mx-auto mt-5 max-w-[10ch] font-sans text-[clamp(3.6rem,9vw,8.5rem)] font-bold uppercase leading-[0.78] tracking-[-0.075em]">
+          <h2 className="mx-auto mt-5 max-w-[11ch] font-display text-[clamp(3.4rem,8vw,7.5rem)] font-semibold leading-[0.82] tracking-[-0.055em]">
             What&apos;s on the table
           </h2>
           <p className="mx-auto mt-6 max-w-lg font-display text-xl italic text-terracotta sm:text-2xl">
@@ -19,27 +19,29 @@ export default function Menu() {
           </p>
         </Reveal>
 
-        <Reveal className="relative mx-auto mt-8 h-[15rem] max-w-5xl sm:h-[21rem]" aria-hidden="true">
-          {signatures.map((dish, index) => (
-            <div
-              key={dish.image}
-              className={`absolute top-0 aspect-square w-[48%] sm:w-[38%] ${
-                index === 0
-                  ? "left-[1%] -rotate-[7deg]"
-                  : index === 1
-                    ? "left-1/2 z-10 -translate-x-1/2 rotate-[2deg]"
-                    : "right-[1%] rotate-[8deg]"
-              }`}
-            >
-              <Image
-                src={dish.image}
-                alt=""
-                fill
-                sizes="(min-width: 640px) 28rem, 48vw"
-                className="object-contain drop-shadow-[0_22px_24px_rgba(82,31,18,.2)]"
-              />
-            </div>
-          ))}
+        <Reveal className="mx-auto mt-8 max-w-5xl">
+          <div className="relative h-[15rem] sm:h-[21rem]" aria-hidden="true">
+            {signatures.map((dish, index) => (
+              <div
+                key={dish.image}
+                className={`absolute top-0 aspect-square w-[48%] sm:w-[38%] ${
+                  index === 0
+                    ? "left-[1%] -rotate-[7deg]"
+                    : index === 1
+                      ? "left-1/2 z-10 -translate-x-1/2 rotate-[2deg]"
+                      : "right-[1%] rotate-[8deg]"
+                }`}
+              >
+                <Image
+                  src={dish.image}
+                  alt=""
+                  fill
+                  sizes="(min-width: 640px) 28rem, 48vw"
+                  className="object-contain drop-shadow-[0_22px_24px_rgba(82,31,18,.2)]"
+                />
+              </div>
+            ))}
+          </div>
         </Reveal>
 
         <Reveal className="mt-4 border-y border-maroon/25">
@@ -80,7 +82,7 @@ export default function Menu() {
         </Reveal>
 
         <Reveal className="mt-8 flex flex-col gap-4 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
-          <p className="text-xs leading-relaxed text-ink/58">
+          <p className="text-xs leading-relaxed text-ink/72">
             Prices are available at the counter and may change.
           </p>
           <p className="font-display text-lg italic text-maroon">

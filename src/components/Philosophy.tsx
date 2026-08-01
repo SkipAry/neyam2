@@ -4,20 +4,20 @@ import Reveal from "./Reveal";
 
 export default function Philosophy() {
   return (
-    <section id="philosophy" className="relative overflow-hidden bg-brass py-20 text-maroon-deep md:py-28">
-      <div className="absolute -right-[8vw] top-6 font-display text-[34vw] italic leading-none text-parchment-light/20" aria-hidden="true">
+    <section id="philosophy" className="relative overflow-hidden bg-parchment-deep py-20 text-maroon-deep md:py-28">
+      <div className="absolute -right-[8vw] top-6 font-display text-[34vw] italic leading-none text-brass/[0.22]" aria-hidden="true">
         ney
       </div>
 
       <div className="relative mx-auto max-w-site px-4 sm:px-6 lg:px-8">
         <Reveal className="grid gap-6 border-b border-maroon/25 pb-10 md:grid-cols-[auto_1fr] md:items-end md:gap-14">
-          <div className="grid h-28 w-28 place-items-center rounded-full border border-maroon/35 text-center sm:h-36 sm:w-36">
+          <div className="grid h-28 w-28 place-items-center rounded-full border border-maroon/25 bg-brass text-center shadow-[0_18px_45px_rgba(82,31,18,.12)] sm:h-36 sm:w-36">
             <span className="font-display text-2xl font-semibold italic sm:text-3xl">
               ney
               <span className="block font-sans text-[11px] font-bold uppercase tracking-[0.2em]">means ghee</span>
             </span>
           </div>
-          <h2 className="max-w-[14ch] font-sans text-[clamp(3.4rem,8vw,7.8rem)] font-bold uppercase leading-[0.8] tracking-[-0.07em]">
+          <h2 className="max-w-[13ch] font-display text-[clamp(3.4rem,7.5vw,7.2rem)] font-semibold leading-[0.84] tracking-[-0.05em]">
             The taste of true tradition
           </h2>
         </Reveal>

@@ -11,9 +11,9 @@ export default function FAQ() {
     <section id="faq" className="bg-parchment py-20 md:py-28">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <Reveal className="text-center">
-          <p className="eyebrow">Before you come</p>
-          <h2 className="mt-5 font-display text-[clamp(2rem,4.4vw,3.2rem)] font-semibold text-maroon-deep">
-            Questions
+          <p className="eyebrow">Good to know</p>
+          <h2 className="mt-5 font-display text-[clamp(2.7rem,5vw,4.4rem)] font-semibold leading-[0.9] tracking-[-0.035em] text-maroon-deep">
+            Before you come
           </h2>
           <Separator className="mx-auto mt-6 text-terracotta/50" />
         </Reveal>

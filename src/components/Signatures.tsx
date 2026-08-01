@@ -25,13 +25,13 @@ export default function Signatures() {
               The ghee edit.
             </h2>
           </div>
-          <p className="max-w-sm text-sm leading-relaxed text-parchment/72 md:text-right md:text-base">
+          <p className="max-w-sm text-sm leading-relaxed text-parchment/82 md:text-right md:text-base">
             Pick a plate. Take a closer look. Then meet the real thing at Model Colony.
           </p>
         </Reveal>
 
         <Reveal className="mt-10 md:mt-14">
-          <div className="signature-theatre relative min-h-[35rem] overflow-hidden rounded-[2.5rem] bg-parchment-light text-maroon-deep sm:min-h-[42rem] lg:min-h-[46rem]">
+          <div className="signature-theatre relative min-h-[35rem] overflow-hidden rounded-[2rem] bg-parchment-light text-maroon-deep sm:min-h-[42rem] lg:min-h-[46rem]">
             <div className="absolute inset-x-0 top-5 flex items-center justify-between px-6 text-[11px] font-semibold uppercase tracking-[0.22em] text-terracotta-ink sm:px-9">
               <span>Signature 0{active + 1}</span>
               <span>{site.priceRange} typical spend</span>
@@ -58,14 +58,18 @@ export default function Signatures() {
             </div>
 
             <div className="absolute inset-x-5 bottom-5 grid gap-5 border-t border-maroon/15 pt-5 sm:inset-x-8 sm:bottom-8 md:grid-cols-[1fr_auto] md:items-end">
-              <div>
+              <div aria-live="polite" aria-atomic="true">
                 <h3 className="font-display text-[clamp(1.8rem,4vw,3.4rem)] font-semibold leading-none text-maroon">
                   {dish.name}
                 </h3>
                 <p className="mt-2 max-w-lg text-sm leading-relaxed text-ink/65 sm:text-base">{dish.line}</p>
               </div>
 
-              <div className="grid grid-cols-3 gap-2" aria-label="Choose a signature dish">
+              <div
+                className="grid grid-cols-3 gap-2"
+                role="group"
+                aria-label="Choose a signature dish"
+              >
                 {signatures.map((item, index) => (
                   <button
                     key={item.name}

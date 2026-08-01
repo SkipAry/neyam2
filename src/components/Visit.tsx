@@ -24,7 +24,7 @@ export default function Visit() {
           </p>
         </Reveal>
 
-        <div className="mt-12 grid overflow-hidden rounded-[1.75rem] border border-parchment/15 bg-maroon shadow-[0_35px_90px_rgba(20,6,3,.38)] lg:grid-cols-[0.8fr_1.2fr]">
+        <div className="mt-12 grid overflow-hidden rounded-[2rem] border border-parchment/15 bg-maroon shadow-[0_35px_90px_rgba(20,6,3,.38)] lg:grid-cols-[0.8fr_1.2fr]">
           <Reveal className="flex flex-col justify-between p-6 sm:p-9 lg:p-12">
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-caps text-brass">Neyam, Pune</p>
@@ -60,7 +60,7 @@ export default function Visit() {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cta="visit-directions"
-                className="flex min-h-[58px] w-full items-center justify-center gap-2 rounded-full bg-parchment-light px-8 text-sm font-semibold text-maroon-deep transition duration-300 hover:-translate-y-0.5 hover:bg-parchment"
+                className="flex min-h-[58px] w-full items-center justify-center gap-2 rounded-full bg-parchment-light px-8 text-sm font-semibold text-maroon-deep transition duration-200 hover:-translate-y-0.5 hover:bg-parchment"
               >
                 Open in Google Maps <span aria-hidden="true">↗</span>
               </a>

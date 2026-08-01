@@ -43,7 +43,7 @@ export default function Hero() {
           top of the wordmark eyebrow rather than pushing it down. Below 360px
           the two labels can't hold 0.2em tracking on one line, so the tracking
           tightens there instead of letting them wrap. */}
-      <div className="absolute inset-x-0 top-[5.4rem] z-20 flex items-center justify-between whitespace-nowrap px-4 text-[11px] font-semibold uppercase tracking-[0.04em] text-maroon/70 xs:tracking-[0.2em] sm:px-7 lg:px-10">
+      <div className="absolute inset-x-0 top-[5.4rem] z-20 flex items-center justify-between whitespace-nowrap px-4 text-[11px] font-semibold uppercase tracking-[0.04em] text-maroon/80 xs:tracking-[0.2em] sm:px-7 lg:px-10">
         <span>Model Colony · Pune</span>
         <span className="hidden sm:inline">Daily · 8 AM–10 PM</span>
         <span>100% vegetarian</span>
@@ -111,7 +111,7 @@ export default function Hero() {
           <p className="hero-copy-headline font-display text-[clamp(1.55rem,2.7vw,2.45rem)] font-semibold leading-[1.02] tracking-[-0.025em]">
             Bringing the authentic flavors of Bengaluru&apos;s breakfasts to the heart of Pune
           </p>
-          <p className="hero-supporting-copy mt-2 hidden text-sm leading-relaxed text-ink/65 sm:block">
+          <p className="hero-supporting-copy mt-2 hidden text-sm leading-relaxed text-ink/72 sm:block">
             Crisp benne dose, soft thatte idli, and filter kaapi poured the long way.
           </p>
         </div>
@@ -132,14 +132,17 @@ export default function Hero() {
             target="_blank"
             rel="noopener noreferrer"
             data-cta="hero-directions"
-            className="inline-flex min-h-[54px] flex-1 items-center justify-center gap-2 rounded-full bg-maroon px-7 text-sm font-semibold text-parchment-light shadow-[0_12px_30px_rgba(82,31,18,.22)] transition duration-300 hover:-translate-y-1 hover:bg-maroon-deep md:flex-none"
+            className="inline-flex min-h-[54px] flex-1 items-center justify-center gap-2 rounded-full bg-maroon px-7 text-sm font-semibold text-parchment-light shadow-[0_12px_30px_rgba(82,31,18,.22)] transition duration-200 hover:-translate-y-0.5 hover:bg-maroon-deep md:flex-none"
           >
             Find your table <span aria-hidden="true">↗</span>
           </a>
         </div>
       </div>
 
-      <div className="hero-ticker absolute inset-x-0 bottom-0 z-30 overflow-hidden bg-maroon py-3 text-parchment-light">
+      <div
+        className="hero-ticker absolute inset-x-0 bottom-0 z-30 overflow-hidden bg-maroon py-3 text-parchment-light"
+        aria-hidden="true"
+      >
         <div className="hero-ticker-track flex w-max items-center text-[11px] font-semibold uppercase tracking-[0.24em]">
           {[0, 1].map((copy) => (
             <span key={copy} className="flex items-center whitespace-nowrap">

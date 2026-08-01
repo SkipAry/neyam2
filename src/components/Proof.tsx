@@ -51,7 +51,7 @@ export default function Proof() {
             <span className="font-sans text-[clamp(5rem,11vw,9.5rem)] font-bold leading-[0.68] tracking-[-0.08em]">
               {site.googleRating != null ? site.googleRating.toFixed(1) : "★"}
             </span>
-            <span className="pb-1 text-xs font-semibold uppercase tracking-[0.18em] text-parchment/75 sm:pb-2">
+            <span className="pb-1 text-xs font-semibold uppercase tracking-[0.18em] text-parchment/90 sm:pb-2">
               <span className="block text-brass-light">★★★★★</span>
               {site.googleReviewCount != null ? `${site.googleReviewCount} Google reviews` : "See us on Google"}
               <span className="ml-1 inline-block transition group-hover:translate-x-1" aria-hidden="true">↗</span>
@@ -79,7 +79,7 @@ export default function Proof() {
               type="button"
               onClick={togglePlayback}
               aria-label={playing ? "Pause restaurant film" : "Play restaurant film"}
-              className="absolute bottom-5 left-5 inline-flex min-h-[50px] cursor-pointer items-center justify-center rounded-full bg-parchment-light px-6 text-xs font-bold text-maroon-deep shadow-lg"
+              className="absolute bottom-5 left-5 inline-flex min-h-[50px] cursor-pointer items-center justify-center rounded-full bg-parchment-light px-6 text-xs font-bold text-maroon-deep shadow-lg transition-colors duration-200 hover:bg-parchment"
             >
               {playing ? "Pause film" : "Play the room"}
             </button>
