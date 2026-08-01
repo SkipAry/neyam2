@@ -85,6 +85,16 @@
         "Nine-viewport browser verification from 320×568 through 1440×900"
       ],
       "rationale": "The polish improves reading rhythm and conversion clarity while protecting keyboard, assistive-technology, reduced-motion, short-phone, tablet, and short-laptop experiences."
+    },
+    {
+      "id": "mobile-kaapi-orbit",
+      "choice": "Keep the circular kaapi orbit visible across mobile and desktop with the message “✦ Authentic Bengaluru dosa ✦ Now serving Pune ✦ Est. 2026 ✦”; use tighter 114% geometry and a slower 56-second rotation through 767.98px.",
+      "references": [
+        "User-selected Bengaluru-to-Pune brand message",
+        "21st-ui-build responsive motion guidance",
+        "UI/UX Pro Max reduced-motion and mobile-fallback guidance"
+      ],
+      "rationale": "Restores a distinctive South Indian brand detail on phones without reintroducing overlap, horizontal overflow, or mandatory motion."
     }
   ]
 }

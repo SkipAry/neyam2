@@ -79,9 +79,9 @@ export default function Hero() {
                 d="M100,100 m-76,0 a76,76 0 1,1 152,0 a76,76 0 1,1 -152,0"
               />
             </defs>
-            <text className="fill-maroon-deep text-[7px] font-semibold uppercase tracking-[0.18em]">
+            <text className="fill-maroon-deep text-[8px] font-semibold uppercase tracking-[0.11em] md:text-[7px] md:tracking-[0.18em]">
               <textPath href="#ghee-orbit">
-                Kaapi in the tumbler · Bengaluru in Pune · Poured the long way ·
+                ✦ Authentic Bengaluru dosa ✦ Now serving Pune ✦ Est. 2026 ✦
               </textPath>
             </text>
           </svg>

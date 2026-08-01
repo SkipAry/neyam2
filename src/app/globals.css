@@ -334,7 +334,11 @@ body.mobile-nav-open .mobile-quick-actions {
   }
 
   .hero-orbit {
-    display: none;
+    display: block;
+    inset: -7%;
+    width: 114%;
+    height: 114%;
+    animation-duration: 56s;
   }
 
   .hero-stamp {
