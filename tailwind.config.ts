@@ -24,6 +24,12 @@ const config: Config = {
          * and the hero's padding pushed content below the fold.
          */
         short: { raw: "(max-height: 820px)" },
+        /**
+         * Below this, wide-tracked micro-labels stop fitting on one line.
+         * 360px covers essentially every phone still in use; the sub-360
+         * band is old hardware (iPhone SE 1st gen, Galaxy Fold cover).
+         */
+        xs: "360px",
       },
       colors: {
         parchment: {

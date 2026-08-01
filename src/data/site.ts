@@ -19,8 +19,11 @@ export const site = {
   tagline: "A slower corner of South India, brought to Pune",
   cuisine: "Authentic Bangalore-style South Indian breakfast",
 
-  /** Set this to the real domain once hosting is decided, then rebuild. */
-  url: "https://neyam.in",
+  /**
+   * No production domain is currently owned by the cafe.
+   * Set only after ownership is confirmed; metadata stays noindex until then.
+   */
+  url: "",
 
   address: {
     line1: "Pride Portal, Gokhale Road",
@@ -44,11 +47,11 @@ export const site = {
 
   instagram: "https://www.instagram.com/neyamofficial/",
   instagramHandle: "@neyamofficial",
-  googleListing: "https://share.google/5AH03bUCtvvkpNiZC",
+  googleListing: "https://share.google/JiP7hxIOy696TR17s",
 
-  /** Real figures from the Google Business listing, 30 July 2026. */
+  /** Real figures from the Google Business listing, 1 August 2026. */
   googleRating: 5.0 as number | null,
-  googleReviewCount: 43 as number | null,
+  googleReviewCount: 46 as number | null,
 
   /** Google's own "price per person" band for the listing. */
   priceRange: "₹200–400",
@@ -64,10 +67,8 @@ export const site = {
 export const fullAddress =
   `${site.address.line1}, ${site.address.line2}, ${site.address.city} ${site.address.pincode}`;
 
-export const mapsLink =
-  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-    `Neyam, ${site.address.line1}, ${site.address.line2}, ${site.address.city} ${site.address.pincode}`
-  )}`;
+/** Exact verified Google Business listing supplied by the restaurant. */
+export const mapsLink = site.googleListing;
 
 export const telLink = site.phone ? `tel:${site.phone}` : "";
 

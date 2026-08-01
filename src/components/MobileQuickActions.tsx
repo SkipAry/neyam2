@@ -72,6 +72,7 @@ export default function MobileQuickActions() {
     >
       <a
         href="#menu"
+        data-cta="mobile-dock-menu"
         tabIndex={active ? 0 : -1}
         className="inline-flex min-h-[50px] items-center justify-center gap-2 rounded-[1rem] px-4 text-sm font-semibold text-maroon-deep transition-colors hover:bg-parchment"
       >
@@ -91,6 +92,7 @@ export default function MobileQuickActions() {
         href={mapsLink}
         target="_blank"
         rel="noopener noreferrer"
+        data-cta="mobile-dock-directions"
         tabIndex={active ? 0 : -1}
         className="inline-flex min-h-[50px] items-center justify-center gap-2 rounded-[1rem] bg-maroon px-4 text-sm font-semibold text-parchment-light transition-colors hover:bg-maroon-deep"
       >

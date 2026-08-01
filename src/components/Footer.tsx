@@ -3,10 +3,10 @@ import { mapsLink, site, telLink } from "@/data/site";
 import { KolamBorder } from "./Ornaments";
 
 const nav = [
-  { href: "#story", label: "Our Story" },
   { href: "#signatures", label: "Signatures" },
   { href: "#menu", label: "Menu" },
-  { href: "#kaapi", label: "Filter Kaapi" },
+  { href: "#philosophy", label: "Our Story" },
+  { href: "#proof", label: "Inside Neyam" },
   { href: "#visit", label: "Visit" },
 ];
 
@@ -55,7 +55,7 @@ export default function Footer() {
                 <li key={l.href}>
                   <a
                     href={l.href}
-                    className="inline-flex min-h-[44px] items-center text-sm text-parchment/75 transition-colors hover:text-parchment-light"
+                    className="inline-flex min-h-[44px] min-w-[44px] items-center text-sm text-parchment/75 transition-colors hover:text-parchment-light"
                   >
                     {l.label}
                   </a>

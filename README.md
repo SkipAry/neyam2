@@ -1,53 +1,117 @@
-# Neyam — website
+# Neyam — Golden Morning
 
-Authentic Bangalore-style South Indian breakfast, Model Colony, Pune.
+Premium, directions-first landing page for Neyam, an authentic Bangalore-style
+South Indian breakfast restaurant in Model Colony, Pune.
 
-Next.js 15 static export. `npm run build` produces a plain `out/` folder of
-HTML, CSS, JS, images and video — no server required.
-
----
-
-## Everything editable lives in one file
-
-**`src/data/site.ts`** holds the menu, hours, address, links, brand statements,
-photo captions and FAQs. Change it there and the whole site follows, including
-the Restaurant schema Google reads.
+The site is a Next.js 15 static export. `npm run build` produces a plain `out/`
+folder of HTML, CSS, JavaScript, images, and video; no application server is
+required.
 
 ---
 
-## Two things still to fill in
+## Page and conversion strategy
 
-1. **Phone number** — `site.phone` and `site.phoneDisplay` are empty. Fill them
-   and a call button appears in the header, the Visit section and the footer
-   automatically. It is also worth adding to your Google listing, which
-   currently has no phone number at all.
+The seven-section journey is intentionally short:
 
-2. **Prices** — your menu card carries none, so none are shown. Add a `price`
-   to any item in `site.ts` and the dotted leader and figure appear on their
-   own. Google's "₹200–400 per person" band is surfaced instead, via
-   `site.priceRange`.
+1. **Hero** — a light, logo-first brand canvas with an unobstructed wordmark, a
+   brass filter-kaapi cutout derived from Neyam's real photograph, restrained
+   pointer depth, Google proof, and one dominant directions action.
+2. **Signatures** — one large dish theatre with three accessible selectors
+   instead of a grid of repeated cards.
+3. **Menu** — unboxed numbered categories with food cutouts and large,
+   responsive typography. Item prices stay hidden until verified.
+4. **Philosophy** — consolidates Neyam's craft, filter-kaapi ritual, and community
+   table into one narrative.
+5. **Proof** — consolidates owned film, restaurant photography, Google proof, and
+   the Instagram route without invented testimonials.
+6. **Visit** — repeats the dominant Directions action beside the full practical
+   details and map.
+7. **FAQ** — answers local-intent questions and supplies matching FAQ schema.
+
+The header and mobile quick-action dock keep Directions prominent throughout
+the journey. The dock appears only after the hero and retires before Visit so it
+does not compete with the final conversion block.
 
 ---
 
-## Facts on this site, and where they came from
+## Content and verified facts
 
-Taken from the verified Google Business listing on 30 July 2026 — none of it
-is estimated:
+Editable menu items, hours, address, links, brand statements, photo captions,
+FAQs, metadata, and Restaurant schema inputs are centralized in
+**`src/data/site.ts`**.
+
+Google Business details verified **1 August 2026**:
 
 | Field | Value |
 | --- | --- |
-| Address | Pride Portal, Gokhale Rd, Model Colony, Shivajinagar, Pune 411016 |
-| Hours | 8:00 AM – 10:00 PM, all seven days |
-| Rating | 5.0 from 43 Google reviews |
+| Address | Pride Portal, Gokhale Road, Model Colony, Shivajinagar, Pune 411016 |
+| Hours | 8:00 AM–10:00 PM, every day |
+| Rating | 5.0 from 46 Google reviews |
 | Price band | ₹200–400 per person |
+| Google listing | `https://share.google/JiP7hxIOy696TR17s` |
 
-If the rating changes, update `site.googleRating` and
-`site.googleReviewCount` together — the schema only emits `aggregateRating`
-when both are present, because a rating without a count gets flagged.
+Update `site.googleRating` and `site.googleReviewCount` together. The schema emits
+`aggregateRating` only when both values exist.
 
-Search results also show a "Poloroche Business Avenue, Viman Nagar" address
-against the name Neyam. That is a different business; the verified panel says
-Model Colony.
+### Intentional omissions and outstanding content
+
+- Contact number — intentionally blank. Do not add one unless the owner supplies
+  it; call controls remain absent meanwhile.
+- Item-level menu prices — only Google's verified ₹200–400 per-person band is
+  shown.
+- Production domain — none is configured. Until a real, cafe-owned domain is
+  supplied, the build emits no canonical URL, absolute Open Graph URL, or sitemap
+  listing and remains `noindex` with crawler access disallowed.
+
+Do not invent or infer any missing value.
+
+---
+
+## Design system and interaction
+
+“Golden Morning” preserves Neyam's parchment `#F5EDDC`, maroon `#71301F`,
+terracotta `#9A3714`, brass `#DEB13A`, and ink `#2B1710` palette, paired with
+Cormorant Garamond and Google Sans. Oversized brand statements, real food
+cutouts, the ghee-sun motif, tactile paper, and restrained kolam details keep
+the regional identity specific.
+
+The **21st UI Explore/Build** workflow supplied project-aware cinematic-brand,
+kinetic-type, product-spotlight, and touch-navigation references. **UI/UX Pro
+Max** guided the immersive restaurant pattern, responsive fallback, type scale,
+touch targets, and CTA hierarchy. Patterns were adapted to Neyam's design
+language; generic SaaS cards, glass-heavy styling, and decorative gradients were
+excluded. Accepted decisions and references live in **`.21st/design.json`**.
+
+3D is limited to the hero kaapi tumbler and signature food spotlight. Both use
+restrained CSS perspective without scroll hijacking, and become fully static
+whenever reduced motion is requested.
+
+### Accessibility and responsive behavior
+
+- Responsive from 320 px mobile through iPad, laptop, and 1440 px desktop.
+- Visible `:focus-visible` treatment and touch targets of at least 44 px.
+- Skip link, semantic headings/landmarks, descriptive media alternatives, and
+  keyboard-safe menu navigation.
+- Mobile drawer traps focus, closes with Escape or at the desktop breakpoint,
+  locks background scroll, and returns focus to its trigger.
+- Videos expose play/pause and mute controls where relevant.
+- `prefers-reduced-motion` pauses hero/video autoplay, disables drift, steam,
+  reveal, transition, and perspective effects, and leaves all content visible.
+
+---
+
+## Verification
+
+Final local verification:
+
+| Check | Result |
+| --- | --- |
+| Responsive browser matrix | **320×568, 390×667/844, 768×700, 1024×768, and 1440×900 passed** |
+| 21st inspection | **0 errors, 0 warnings** |
+| Dependency audit | **0 vulnerabilities** |
+
+The production static build completes successfully, and the page runs locally
+without runtime errors.
 
 ---
 
@@ -59,127 +123,33 @@ npm run dev      # http://localhost:3000
 npm run build    # writes ./out
 ```
 
-### If `npm install` is painfully slow or fails
-
-This folder is inside OneDrive, and `node_modules` is tens of thousands of
-tiny files that OneDrive tries to sync one by one. During development the
-install had to be moved to local disk to complete at all. If you hit it:
-
-- Right-click the `neyam-website` folder → **Always keep on this device** off,
-  or better, exclude `node_modules` from syncing.
-- Or copy the project to a non-synced folder (e.g. `C:\dev\neyam`) to work on
-  it, and copy the source back when done.
-
-The build output (`out/`) is small and syncs fine.
-
----
-
-## Design notes
-
-**Responsive behavior** — the compact hero tightens its type and spacing on
-short screens. On mobile, signature dishes and reels become horizontal
-scroll-snap rails, the printed menu gains category shortcuts, and a fixed
-Menu/Directions dock appears only after the hero and retires before the Visit
-section. Tablet and desktop layouts keep their multi-column grids. The mobile
-drawer traps focus, closes with Escape or at the desktop breakpoint, and all
-video reels provide an explicit play/pause control.
-
-**21st design context** — `.21st/design.json` is the durable source for the
-site's visual identity, responsive and accessibility constraints, and the
-21st.dev references behind accepted interface decisions. Keep it aligned when
-a future change alters the palette, typography, motifs or responsive direction.
-
-**Palette** — parchment `#F5EDDC`, maroon `#71301F`, terracotta `#9A3714`,
-lifted from the brand's own Instagram artwork. (The brief listed `#F5EDD`,
-which is five hex digits; `#F5EDDC` is the assumed intent.)
-
-**Brass was lightened.** The brand gold `#B8860B` only reaches 3.01:1 on
-maroon and 2.20:1 on terracotta — below WCAG AA for the small caps labels it
-was used for. `brass` is now `#DEB13A` (4.88:1 on maroon) and `brass.light`
-`#EACB70` for the lightest ground. The original is kept as `brass.deep` for
-large display type. The page currently passes AA with **zero** contrast
-failures at 320/390/768/1440px.
-
-**The stamp** (`components/Stamp.tsx`) is the signature device, echoing the
-scalloped postage-stamp frames in the brand's artwork. Drawn as real SVG
-geometry rather than CSS masks so the scallops stay circular at any aspect
-ratio, with the count per edge adjusted so a whole number always fits.
-
-**Chittara, not cave art.** The line work in `components/Ornaments.tsx` is
-original geometry inspired by Chittara — the folk art of the Malnad region of
-Karnataka — plus kolam dot-and-loop borders, a generic gopuram silhouette and
-banana-leaf ribs. Karnataka was chosen deliberately over prehistoric rock art
-because the menu is Karnataka's: Benne Dose, Davangere Dose, thatte idli,
-Bisibele Baath, Puliyogare. No existing artwork was traced.
-
-**Scroll storytelling** — `ScrollStage` publishes a section's scroll progress
-as a CSS variable `--stage`, and children drift on it using the standalone
-`translate` property. `translate` rather than `transform` on purpose:
-`.reveal` already animates `transform`, and two rules writing one property
-means one silently wins.
-
-**Reveal reads geometry, not IntersectionObserver.** An observer-based version
-reliably failed to fire for the Menu heading at 1440px, leaving real content
-at opacity 0 forever. It now uses one shared rAF-throttled scroll listener for
-the whole page; elements unregister once shown and the listener detaches when
-the last one has revealed. Content never staying hidden matters more than the
-elegance of the mechanism.
-
-**Reduced motion** — verified: all 45 revealed elements are fully visible,
-the hero video is paused on its poster, steam is off, and all drift is
-disabled. Nothing is animation-dependent to be readable.
+This repository is inside OneDrive. If dependency installation is unusually
+slow or fails, keep the project on local disk or exclude `node_modules` from
+syncing. The small `out/` directory can remain synced.
 
 ---
 
 ## Assets
 
-| Source | Used as |
-| --- | --- |
-| `Untitled video.mp4` | hero background (silent, 1.5 MB, was 9.8 MB) + two food stills |
-| `reel1.mp4` | ambience reel (silent loop) + four photographs |
-| `reel3.mp4` | guest testimonial — keeps audio, starts muted, with play/pause and mute controls |
-| `Ghee-*-No-Background.png` | the three floating signature dishes |
-| `logo.jpg` | logo mark extracted to transparent PNG, cream and maroon |
-| `3.webp` | the filter kaapi photograph, cropped out of the artwork |
-
-**Not used, deliberately:**
-
-- `700e3313025d80ea2a0b1bd5c9d14560.jpg` — a stock photo with **pngtree
-  watermarks** tiled across it. Not ours to publish.
-- `reel2.mp4` — the pre-launch teaser ("Heritage Benne Dosas are arriving
-  soon"). Neyam is open, so it would read as stale.
-- `1.webp`, `2.webp`, `4.webp` — the Instagram artwork already has its own
-  scalloped frame and its own headline, so putting it inside a stamp gave a
-  frame-within-a-frame and repeated copy. Kept in `public/brand/` in case you
-  want it elsewhere.
-
-Stills from `reel1` were cropped to `656×1080` from offset `32,150` to clear
-the reel template's edge border and the logo watermark.
-
-### Two files I could not delete
-
-OneDrive refused the deletions, so they are excluded at build time instead:
-
-- `public/reels/reel-3.mp4` — a 48-byte truncated encode. Nothing references it.
-- `public/photos/*.jpg` — superseded by the `.webp` versions.
-
-Delete them yourself when convenient, or leave them; they never reach `out/`.
+The site uses Neyam-owned brand marks, food cutouts, restaurant footage, reel
+posters, and stills in `public/`. The watermarked stock image and stale
+pre-launch reel are deliberately excluded. Superseded/truncated media that
+OneDrive would not delete is not referenced and does not reach `out/`.
 
 ---
 
-## Deploying
+## Deployment
 
-Static export, so any static host works.
+Any static host can serve `out/`.
 
-If you use **Appwrite Sites**, two things bit us on the last project:
+For **Appwrite Sites**:
 
-1. Set the output directory to **`./out`**. Appwrite's Next.js preset defaults
-   to `./.next`, which is for server-rendered apps and will not serve properly.
-2. After every push, open the **Deployments** tab and check which row says
-   *Active*. A new build sits at *Ready* and does **not** go live on its own —
-   click **Activate** on it. And never mix a manual `code.tar.gz` upload with
-   Git deploys: a manual deployment holding the Active slot silently blocks
-   every later Git build from going live.
+1. Set the output directory to **`./out`**, not `./.next`.
+2. After a build, confirm the intended deployment is marked **Active**. A
+   deployment can remain Ready without becoming live.
+3. Do not mix manual archive uploads with Git deployments; a manual deployment
+   holding the Active slot can prevent a later Git build from going live.
 
-Set `site.url` to the real domain before the final build — it feeds the
-canonical URL, Open Graph tags, the sitemap and the Restaurant schema.
+When the cafe has a real owned production domain, set `site.url` before the
+public launch. That enables the canonical URL, absolute Open Graph URL, sitemap
+listing, indexing, and the corresponding absolute Restaurant schema URLs.

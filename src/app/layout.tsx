@@ -13,7 +13,12 @@ import { faqs, fullAddress, menu, site } from "@/data/site";
  */
 
 export const metadata: Metadata = {
-  metadataBase: new URL(site.url),
+  ...(site.url
+    ? {
+        metadataBase: new URL(site.url),
+        alternates: { canonical: "/" },
+      }
+    : {}),
   title: {
     default: `${site.name} — ${site.cuisine} in Model Colony, Pune`,
     template: `%s · ${site.name}`,
@@ -30,22 +35,36 @@ export const metadata: Metadata = {
     "Shivajinagar breakfast",
     "thatte idli Pune",
   ],
-  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
-    url: site.url,
     siteName: site.name,
     title: `${site.name} — ${site.cuisine} in Pune`,
     description:
       "A slower corner of South India, brought to Pune. Benne Dose, thatte idli and filter kaapi in Model Colony.",
     locale: "en_IN",
+    ...(site.url
+      ? {
+          url: site.url,
+          images: [
+            {
+              url: new URL("/hero-poster.jpg", site.url),
+              width: 1600,
+              height: 900,
+              alt: "Bangalore-style benne dose at Neyam in Model Colony, Pune",
+            },
+          ],
+        }
+      : {}),
   },
   twitter: {
     card: "summary_large_image",
     title: `${site.name} — ${site.cuisine} in Pune`,
     description: "A slower corner of South India, brought to Pune.",
+    ...(site.url ? { images: [new URL("/hero-poster.jpg", site.url)] } : {}),
   },
-  robots: { index: true, follow: true },
+  robots: site.url
+    ? { index: true, follow: true }
+    : { index: false, follow: false, noarchive: true },
 };
 
 export const viewport = {
@@ -67,13 +86,17 @@ function schema() {
 
   const restaurant: Record<string, unknown> = {
     "@type": "Restaurant",
-    "@id": `${site.url}#restaurant`,
+    ...(site.url
+      ? {
+          "@id": `${site.url}#restaurant`,
+          url: site.url,
+          image: new URL("/hero-poster.jpg", site.url).toString(),
+        }
+      : {}),
     name: site.name,
     description: `${site.cuisine} in Model Colony, Pune.`,
     servesCuisine: ["South Indian", "Karnataka", "Vegetarian"],
     priceRange: site.priceRange,
-    url: site.url,
-    image: `${site.url}hero-poster.jpg`,
     address: {
       "@type": "PostalAddress",
       streetAddress: `${site.address.line1}, ${site.address.line2}`,
@@ -133,7 +156,7 @@ function schema() {
       restaurant,
       {
         "@type": "FAQPage",
-        "@id": `${site.url}#faq`,
+        ...(site.url ? { "@id": `${site.url}#faq` } : {}),
         mainEntity: faqs.map((f) => ({
           "@type": "Question",
           name: f.question,
@@ -162,10 +185,10 @@ export default function RootLayout({
       </head>
       <body>
         <a
-          href="#menu"
+          href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-maroon focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-parchment-light"
         >
-          Skip to the menu
+          Skip to main content
         </a>
         {children}
         <span className="sr-only">{fullAddress}</span>

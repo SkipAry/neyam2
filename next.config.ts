@@ -11,6 +11,7 @@ import type { NextConfig } from "next";
  */
 const nextConfig: NextConfig = {
   output: "export",
+  outputFileTracingRoot: process.cwd(),
   images: {
     // next/image optimisation needs a server; static export requires this off.
     unoptimized: true,

@@ -1,29 +1,23 @@
-import CommunityTable from "@/components/CommunityTable";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import Kaapi from "@/components/Kaapi";
 import Menu from "@/components/Menu";
 import MobileQuickActions from "@/components/MobileQuickActions";
-import Posts from "@/components/Posts";
-import Reels from "@/components/Reels";
+import Philosophy from "@/components/Philosophy";
+import Proof from "@/components/Proof";
 import Signatures from "@/components/Signatures";
-import Story from "@/components/Story";
 import Visit from "@/components/Visit";
 
 /**
- * Section order is a deliberate rhythm of dark → light → dark so the
- * page has breathing room, rather than one flat cream scroll:
+ * Section order is a deliberate rhythm of light → dark → light so the
+ * art-directed hero can hand off into a clear visit funnel:
  *
- *   Hero            dark  (video)
- *   Story           light
- *   Signatures      light-deep (floating dishes)
- *   Menu            dark  (the card, as a bright object on maroon)
- *   Kaapi           light
- *   CommunityTable  terracotta
- *   Reels           light-deep
- *   Posts           light
+ *   Hero            light (brand canvas + food sculpture)
+ *   Signatures      dark  (single-dish theatre)
+ *   Menu            light (unboxed editorial menu)
+ *   Philosophy      brass (story, kaapi, community)
+ *   Proof           terracotta (monumental rating + real atmosphere)
  *   Visit           dark  (+ map)
  *   FAQ             light
  *   Footer          dark
@@ -33,15 +27,12 @@ export default function Home() {
     <>
       <Header />
       <MobileQuickActions />
-      <main>
+      <main id="main-content">
         <Hero />
-        <Story />
         <Signatures />
         <Menu />
-        <Kaapi />
-        <CommunityTable />
-        <Reels />
-        <Posts />
+        <Philosophy />
+        <Proof />
         <Visit />
         <FAQ />
       </main>

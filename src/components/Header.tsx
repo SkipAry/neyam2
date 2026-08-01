@@ -2,237 +2,181 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { mapsLink, site, telLink } from "@/data/site";
+import { mapsLink, site } from "@/data/site";
 
 const links = [
-  { href: "#story", label: "Our Story" },
   { href: "#signatures", label: "Signatures" },
   { href: "#menu", label: "Menu" },
-  { href: "#kaapi", label: "Filter Kaapi" },
+  { href: "#philosophy", label: "Our Story" },
   { href: "#visit", label: "Visit" },
 ];
 
 export default function Header() {
   const [solid, setSolid] = useState(false);
   const [open, setOpen] = useState(false);
-  const homeRef = useRef<HTMLAnchorElement | null>(null);
   const toggleRef = useRef<HTMLButtonElement | null>(null);
-  const firstMobileLinkRef = useRef<HTMLAnchorElement | null>(null);
+  const firstLinkRef = useRef<HTMLAnchorElement | null>(null);
 
   useEffect(() => {
-    const onScroll = () => setSolid(window.scrollY > 40);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const update = () => setSolid(window.scrollY > 32);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
   }, []);
 
-  // Lock the page while the drawer is open, and let Escape close it.
   useEffect(() => {
     if (!open) return;
-    const panel = document.getElementById("mobile-nav");
+    const previous = document.body.style.overflow;
     const desktop = window.matchMedia("(min-width: 1024px)");
-    const previousOverflow = document.body.style.overflow;
-    const focusFrame = requestAnimationFrame(() => {
-      if (!panel?.hidden) firstMobileLinkRef.current?.focus();
-    });
-    const onDesktop = () => {
-      if (!desktop.matches) return;
-      homeRef.current?.focus();
-      setOpen(false);
-    };
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
+    const panel = document.getElementById("mobile-nav");
+    const focusFrame = requestAnimationFrame(() => firstLinkRef.current?.focus());
+    const closeOnDesktop = () => desktop.matches && setOpen(false);
+    const handleKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
         setOpen(false);
         return;
       }
-      if (e.key !== "Tab" || !panel) return;
-
+      if (event.key !== "Tab" || !panel) return;
       const focusable = [
-        homeRef.current,
         toggleRef.current,
-        ...Array.from(
-          panel.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), [tabindex="0"]')
-        ),
+        ...Array.from(panel.querySelectorAll<HTMLElement>("a[href], button:not([disabled])")),
       ].filter((node): node is HTMLElement => node != null);
       if (focusable.length === 0) return;
-
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
-      if (e.shiftKey && document.activeElement === first) {
-        e.preventDefault();
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
         last.focus();
-      } else if (!e.shiftKey && document.activeElement === last) {
-        e.preventDefault();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
         first.focus();
       }
     };
 
-    document.addEventListener("keydown", onKey);
-    desktop.addEventListener("change", onDesktop);
     document.body.style.overflow = "hidden";
     document.body.classList.add("mobile-nav-open");
+    desktop.addEventListener("change", closeOnDesktop);
+    document.addEventListener("keydown", handleKey);
 
     return () => {
       cancelAnimationFrame(focusFrame);
-      document.removeEventListener("keydown", onKey);
-      desktop.removeEventListener("change", onDesktop);
-      document.body.style.overflow = previousOverflow;
+      desktop.removeEventListener("change", closeOnDesktop);
+      document.removeEventListener("keydown", handleKey);
+      document.body.style.overflow = previous;
       document.body.classList.remove("mobile-nav-open");
       if (panel?.contains(document.activeElement)) toggleRef.current?.focus();
     };
   }, [open]);
 
   const opaque = solid || open;
-
-  /**
-   * The hero is dark footage, so at the top of the page the header must be
-   * light; once it has a parchment background it must be dark. Getting this
-   * backwards makes the whole nav invisible over the video — which is
-   * exactly what the first build did.
-   */
-  const wordmark = opaque ? "text-maroon" : "text-parchment-light";
-  const subline = opaque ? "text-terracotta-ink" : "text-parchment/75";
-  const navLink = opaque
-    ? "text-maroon-deep hover:text-terracotta"
-    : "text-parchment/90 hover:text-parchment-light";
-  const cta = opaque
-    ? "bg-maroon text-parchment-light hover:bg-maroon-deep"
-    : "bg-parchment-light text-maroon-deep hover:bg-parchment";
-  const bar = opaque ? "bg-maroon" : "bg-parchment-light";
+  const foreground = "text-maroon-deep";
+  const muted = "text-terracotta-ink";
+  const line = "bg-maroon";
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
+      className={`fixed inset-x-0 top-0 z-50 border-b transition duration-500 motion-reduce:transition-none ${
         opaque
-          ? "border-b border-maroon/15 bg-parchment/95 backdrop-blur-md"
-          : "bg-gradient-to-b from-maroon-deep/55 to-transparent"
-      } motion-reduce:transition-none`}
+          ? "border-maroon/15 bg-parchment/95 shadow-[0_8px_30px_rgba(43,23,16,0.08)] backdrop-blur-md"
+          : "border-transparent bg-parchment-light/70 backdrop-blur-[2px]"
+      }`}
     >
-      <div className="mx-auto flex h-20 max-w-site items-center justify-between px-4 sm:px-6 lg:px-8">
-        <a
-          ref={homeRef}
-          href="#home"
-          onClick={() => setOpen(false)}
-          className="flex items-center gap-3"
-          aria-label={`${site.name} — home`}
-        >
-          {/* Two marks rather than a CSS filter, so each stays crisp */}
+      <div className="mx-auto flex h-[4.75rem] max-w-site items-center justify-between px-4 sm:px-6 lg:px-8">
+        <a href="#home" className="flex min-h-[44px] items-center gap-3" aria-label="Neyam — home">
           <Image
-            src={opaque ? "/brand/mark-maroon.png" : "/brand/mark-cream.png"}
+            src="/brand/mark-maroon.png"
             alt=""
-            width={34}
-            height={46}
-            className="h-11 w-auto"
+            width={30}
+            height={42}
+            className="h-10 w-auto"
             priority
           />
           <span className="leading-none">
-            <span
-              className={`block font-display text-xl font-semibold tracking-[0.22em] transition-colors duration-500 ${wordmark}`}
-            >
+            <span className={`block font-display text-xl font-semibold tracking-[0.2em] ${foreground}`}>
               NEYAM
             </span>
-            <span
-              className={`mt-1 block text-[11px] uppercase tracking-caps transition-colors duration-500 ${subline}`}
-            >
-              Model Colony · Pune
+            <span className={`mt-1 block text-[11px] font-semibold uppercase tracking-caps ${muted}`}>
+              Heritage dose &amp; kaapi
             </span>
           </span>
         </a>
 
-        <nav aria-label="Main" className="hidden items-center gap-5 lg:flex">
-          {links.map((l) => (
+        <nav aria-label="Main" className="hidden items-center gap-2 lg:flex">
+          {links.map((link) => (
             <a
-              key={l.href}
-              href={l.href}
-              className={`inline-flex min-h-[44px] min-w-[44px] items-center justify-center px-2 text-sm font-medium transition-colors duration-500 ${navLink}`}
+              key={link.href}
+              href={link.href}
+              className={`inline-flex min-h-[44px] items-center rounded-full px-4 text-sm font-medium transition-colors hover:bg-parchment/10 ${foreground}`}
             >
-              {l.label}
+              {link.label}
             </a>
           ))}
-          {telLink ? (
-            <a
-              href={telLink}
-              className={`rounded-full px-6 py-3 text-sm font-semibold transition-colors duration-500 ${cta}`}
-            >
-              {site.phoneDisplay}
-            </a>
-          ) : (
-            <a
-              href={mapsLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`rounded-full px-6 py-3 text-sm font-semibold transition-colors duration-500 ${cta}`}
-            >
-              Get Directions
-            </a>
-          )}
+          <a
+            href={mapsLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-cta="header-directions"
+            className={`ml-2 inline-flex min-h-[48px] items-center gap-2 rounded-full px-6 text-sm font-semibold transition duration-300 hover:-translate-y-0.5 ${
+              opaque
+                ? "bg-maroon text-parchment-light hover:bg-maroon-deep"
+                : "border border-maroon/25 bg-parchment-light/55 text-maroon-deep hover:bg-parchment-light"
+            }`}
+          >
+            Get directions <span aria-hidden="true">↗</span>
+          </a>
         </nav>
 
         <button
           ref={toggleRef}
           type="button"
-          onClick={() => setOpen((v) => !v)}
+          onClick={() => setOpen((value) => !value)}
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={open ? "Close menu" : "Open menu"}
-          className="flex h-12 w-12 flex-col items-center justify-center gap-[5px] lg:hidden"
+          className="flex h-12 w-12 cursor-pointer flex-col items-center justify-center gap-[5px] rounded-full lg:hidden"
         >
-          <span
-            className={`block h-[2px] w-6 transition-all duration-300 motion-reduce:transition-none ${bar} ${
-              open ? "translate-y-[7px] rotate-45" : ""
-            }`}
-          />
-          <span
-            className={`block h-[2px] w-6 transition-all duration-200 motion-reduce:transition-none ${bar} ${
-              open ? "opacity-0" : ""
-            }`}
-          />
-          <span
-            className={`block h-[2px] w-6 transition-all duration-300 motion-reduce:transition-none ${bar} ${
-              open ? "-translate-y-[7px] -rotate-45" : ""
-            }`}
-          />
+          <span className={`h-[2px] w-6 transition ${line} ${open ? "translate-y-[7px] rotate-45" : ""}`} />
+          <span className={`h-[2px] w-6 transition ${line} ${open ? "opacity-0" : ""}`} />
+          <span className={`h-[2px] w-6 transition ${line} ${open ? "-translate-y-[7px] -rotate-45" : ""}`} />
         </button>
       </div>
 
-      {/* Mobile drawer */}
       <div
         id="mobile-nav"
         hidden={!open}
-        className="max-h-[calc(100svh-5rem)] overflow-y-auto border-t border-maroon/15 bg-parchment px-4 pb-8 pt-2 sm:px-6 lg:hidden"
+        className="max-h-[calc(100svh-4.75rem)] overflow-y-auto border-t border-maroon/15 bg-parchment px-4 pb-8 sm:px-6 lg:hidden"
       >
+        <p className="border-b border-maroon/10 py-4 text-[11px] font-semibold uppercase tracking-caps text-terracotta-ink">
+          Model Colony, Pune · Daily 8 AM–10 PM
+        </p>
         <nav aria-label="Main mobile">
           <ul className="divide-y divide-maroon/10">
-            {links.map((l, index) => (
-              <li key={l.href}>
+            {links.map((link, index) => (
+              <li key={link.href}>
                 <a
-                  ref={index === 0 ? firstMobileLinkRef : undefined}
-                  href={l.href}
+                  ref={index === 0 ? firstLinkRef : undefined}
+                  href={link.href}
                   onClick={() => setOpen(false)}
-                  className="grid min-h-[52px] grid-cols-[2.25rem_1fr_auto] items-center gap-3 py-2 font-display text-lg text-maroon-deep"
+                  className="grid min-h-[58px] grid-cols-[2rem_1fr_auto] items-center gap-3 font-display text-xl text-maroon-deep"
                 >
-                  <span className="font-sans text-[10px] font-semibold tracking-caps text-terracotta-ink">
+                  <span className="font-sans text-[11px] font-semibold tracking-caps text-terracotta-ink">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <span>{l.label}</span>
-                  <span className="font-sans text-base text-maroon/45" aria-hidden="true">
-                    ↘
-                  </span>
+                  {link.label}
+                  <span aria-hidden="true" className="font-sans text-base text-maroon/45">↘</span>
                 </a>
               </li>
             ))}
           </ul>
         </nav>
-        <div className="flex items-center justify-between border-b border-maroon/10 py-3 text-[10px] font-semibold uppercase tracking-caps text-terracotta-ink">
-          <span>Open every day</span>
-          <span>{site.hours}</span>
-        </div>
         <a
-          href={telLink || mapsLink}
-          {...(telLink ? {} : { target: "_blank", rel: "noopener noreferrer" })}
-          className="mt-6 flex min-h-[52px] items-center justify-center rounded-full bg-maroon px-6 text-sm font-semibold text-parchment-light"
+          href={mapsLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-cta="mobile-nav-directions"
+          className="mt-6 flex min-h-[54px] items-center justify-center rounded-full bg-maroon px-6 text-sm font-semibold text-parchment-light"
         >
-          {telLink ? `Call ${site.phoneDisplay}` : "Get Directions"}
+          Get directions <span className="ml-2" aria-hidden="true">↗</span>
         </a>
       </div>
     </header>

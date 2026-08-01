@@ -8,7 +8,7 @@ import Reveal from "./Reveal";
  */
 export default function FAQ() {
   return (
-    <section className="bg-parchment py-20 md:py-28">
+    <section id="faq" className="bg-parchment py-20 md:py-28">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <Reveal className="text-center">
           <p className="eyebrow">Before you come</p>

@@ -6,7 +6,7 @@
     "styling": "Tailwind CSS 3"
   },
   "identity": {
-    "tone": ["warm", "unhurried", "editorial", "crafted", "regional"],
+    "tone": ["warm", "bold", "art-directed", "playful", "crafted", "regional"],
     "colors": {
       "parchment": "#F5EDDC",
       "maroon": "#71301F",
@@ -15,14 +15,16 @@
       "ink": "#2B1710"
     },
     "typography": {
-      "display": "Cormorant Garamond Variable",
+      "brandStatements": "Google Sans Variable",
+      "editorialVoice": "Cormorant Garamond Variable",
       "body": "Google Sans Variable"
     },
     "motifs": [
-      "scalloped postage-stamp photography",
-      "Chittara-inspired line work",
-      "kolam borders",
-      "printed menu card"
+      "ghee sun",
+      "sculptural food cutouts",
+      "oversized brand typography",
+      "tactile paper",
+      "kolam line work"
     ]
   },
   "constraints": [
@@ -32,26 +34,48 @@
     "Maintain WCAG AA color contrast and visible focus",
     "Honor prefers-reduced-motion",
     "Keep the application compatible with Next.js static export",
-    "Avoid generic SaaS cards, glass-heavy styling, and decorative gradients"
+    "Avoid generic SaaS cards, glass-heavy styling, and decorative gradients",
+    "Do not publish a phone number until the restaurant supplies one",
+    "Do not use neyam.in or emit indexable metadata until an owned domain is confirmed"
   ],
   "decisions": [
     {
-      "id": "editorial-mobile-actions",
-      "choice": "Use a compact parchment-and-maroon mobile quick-action dock adapted from touch-friendly 21st mobile navigation patterns.",
+      "id": "golden-morning-hero",
+      "choice": "Use a light, logo-first hero with an unobstructed oversized Neyam wordmark, generated brass filter-kaapi cutout based on Neyam's real photograph, one dominant directions CTA, and restrained CSS 3D response.",
       "references": [
-        "21st component 2580: Modern Mobile Menu",
-        "21st component 8343: Bottom Nav Bar"
+        "Benne: centred brand canvas and confident negative space",
+        "21st component 12200: PrismaHero",
+        "21st component 8592: Animated Feature Spotlight 3D",
+        "UI/UX Pro Max: immersive interactive restaurant pattern"
       ],
-      "rationale": "Keeps menu and directions reachable during the long editorial scroll without replacing the existing header."
+      "rationale": "Makes the brand name fully legible, gives the first screen an unmistakably South Indian morning cue, and keeps directions as the clearest conversion priority."
     },
     {
-      "id": "short-screen-hero",
-      "choice": "Retain the cinematic hero and dual CTAs while tightening type and vertical rhythm only on narrow, short screens.",
+      "id": "full-page-art-direction",
+      "choice": "Carry the hero language through unboxed menu rows, monumental brand statements, a single signature-food theatre, and oversized Google proof.",
       "references": [
-        "21st component 19074: Editorial Collage Hero",
-        "21st component 19077: Editorial Image Hero"
+        "21st component 19782: Text Roll",
+        "21st editorial composition patterns"
       ],
-      "rationale": "Preserves the distinctive food footage while moving primary actions into reach on 320px-wide phones."
+      "rationale": "Prevents the page from falling back into repetitive rounded cards after the hero."
+    },
+    {
+      "id": "motion-discipline",
+      "choice": "Reserve dimensional motion for the hero kaapi tumbler and signature dish; use slower entrance reveals elsewhere and disable decorative motion under reduced-motion preferences.",
+      "references": [
+        "21st component 8592: Animated Feature Spotlight 3D",
+        "21st-ui-review accessibility guidance"
+      ],
+      "rationale": "Adds tactile depth where it improves appetite appeal without turning the restaurant page into a demo reel."
+    },
+    {
+      "id": "visit-funnel",
+      "choice": "Use the sequence Hero, Signatures, Menu, Philosophy, Proof, Visit, FAQ with Directions dominant in the hero, header, mobile dock, and final visit section.",
+      "references": [
+        "UI/UX Pro Max conversion pattern",
+        "Existing verified Google Business listing"
+      ],
+      "rationale": "Balances brand storytelling with a clear path from appetite to an in-person visit."
     }
   ]
 }

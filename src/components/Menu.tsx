@@ -1,119 +1,90 @@
-import { menu, site } from "@/data/site";
-import { KolamBorder, Separator } from "./Ornaments";
+import Image from "next/image";
+import { menu, signatures, site } from "@/data/site";
 import Reveal from "./Reveal";
 
-/**
- * MENU — set as a printed card, because that is how Neyam presents it.
- *
- * Prices are intentionally absent: the restaurant's own menu card carries
- * none, and inventing them would mislead customers. The moment a `price`
- * is added to an item in site.ts, the dotted leader and figure appear.
- */
 export default function Menu() {
   return (
-    <section id="menu" className="relative overflow-hidden bg-maroon py-20 md:py-28">
-      <div className="absolute inset-x-0 top-0 text-brass/30" aria-hidden="true">
-        <KolamBorder height={16} uid="menu" />
-      </div>
+    <section id="menu" className="relative overflow-hidden bg-parchment-light py-20 text-maroon-deep md:py-28">
+      <div className="absolute -left-24 top-32 h-72 w-72 rounded-full border-[3rem] border-brass/15" aria-hidden="true" />
+      <div className="absolute -right-20 bottom-48 h-56 w-56 rounded-full bg-terracotta/[0.06]" aria-hidden="true" />
 
       <div className="relative mx-auto max-w-site px-4 sm:px-6 lg:px-8">
         <Reveal className="text-center">
-          <p className="eyebrow !text-brass">The full card</p>
-          <h2 className="mt-5 font-display text-[clamp(2rem,4.6vw,3.4rem)] font-semibold text-parchment-light">
-            Everything we make
+          <p className="eyebrow">From the griddle &amp; the filter</p>
+          <h2 className="mx-auto mt-5 max-w-[10ch] font-sans text-[clamp(3.6rem,9vw,8.5rem)] font-bold uppercase leading-[0.78] tracking-[-0.075em]">
+            What&apos;s on the table
           </h2>
-          <Separator className="mx-auto mt-6 text-parchment/40" />
-          <p className="mx-auto mt-6 max-w-lg text-sm leading-relaxed text-parchment/70">
-            A short menu, cooked properly, changed rarely.
+          <p className="mx-auto mt-6 max-w-lg font-display text-xl italic text-terracotta sm:text-2xl">
+            A short menu. No shortcuts.
           </p>
         </Reveal>
 
-        {/* The card itself */}
-        <Reveal
-          variant="stamp"
-          className="mx-auto mt-14 max-w-4xl"
-        >
-          <div className="rounded-sm bg-parchment-light px-6 py-10 shadow-[0_28px_60px_rgba(30,10,5,0.4)] sm:px-10 md:px-14 md:py-14">
-            <div className="text-center">
-              <p className="font-display text-2xl font-semibold tracking-[0.2em] text-maroon">
-                NEYAM
-              </p>
-              <p className="mt-2 text-[11px] uppercase tracking-caps text-terracotta-ink">
-                {site.address.line2} · {site.address.city}
-              </p>
-              <Separator className="mx-auto mt-5 text-terracotta/45" />
+        <Reveal className="relative mx-auto mt-8 h-[15rem] max-w-5xl sm:h-[21rem]" aria-hidden="true">
+          {signatures.map((dish, index) => (
+            <div
+              key={dish.image}
+              className={`absolute top-0 aspect-square w-[48%] sm:w-[38%] ${
+                index === 0
+                  ? "left-[1%] -rotate-[7deg]"
+                  : index === 1
+                    ? "left-1/2 z-10 -translate-x-1/2 rotate-[2deg]"
+                    : "right-[1%] rotate-[8deg]"
+              }`}
+            >
+              <Image
+                src={dish.image}
+                alt=""
+                fill
+                sizes="(min-width: 640px) 28rem, 48vw"
+                className="object-contain drop-shadow-[0_22px_24px_rgba(82,31,18,.2)]"
+              />
             </div>
+          ))}
+        </Reveal>
 
-            <nav aria-label="Menu categories" className="-mx-2 mt-7 sm:hidden">
-              <ul className="no-scrollbar flex gap-2 overflow-x-auto px-2 pb-2">
-                {menu.map((section) => (
-                  <li key={section.id}>
-                    <a
-                      href={`#menu-${section.id}`}
-                      className="inline-flex min-h-[44px] items-center whitespace-nowrap rounded-full border border-maroon/15 bg-parchment px-4 text-xs font-semibold text-maroon-deep transition-colors hover:border-maroon/35 hover:bg-parchment-deep"
+        <Reveal className="mt-4 border-y border-maroon/25">
+          <div className="grid gap-x-10 lg:grid-cols-2">
+            {menu.map((section, index) => (
+              <section
+                key={section.id}
+                id={`menu-${section.id}`}
+                className="scroll-mt-28 border-b border-maroon/20 py-7 last:border-b-0 lg:[&:nth-last-child(-n+2)]:border-b-0"
+                aria-labelledby={`menu-title-${section.id}`}
+              >
+                <div className="grid grid-cols-[3.2rem_1fr] gap-4 sm:grid-cols-[4.25rem_1fr]">
+                  <p className="font-sans text-xs font-bold tracking-[0.18em] text-terracotta-ink" aria-hidden="true">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <div>
+                    <h3
+                      id={`menu-title-${section.id}`}
+                      className="font-display text-[1.75rem] font-semibold leading-none sm:text-[2.2rem]"
                     >
                       {section.title}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-
-            <div className="mt-10 grid gap-x-14 gap-y-10 sm:grid-cols-2">
-              {menu.map((section, i) => (
-                <div
-                  key={section.id}
-                  id={`menu-${section.id}`}
-                  className="scroll-mt-28"
-                >
-                  <Reveal
-                    delay={Math.min(i * 0.06, 0.3)}
-                    className="break-inside-avoid"
-                  >
-                    <h3 className="font-display text-lg font-semibold uppercase tracking-wide text-maroon-deep">
-                      {section.title}
                     </h3>
-                    <p className="mt-1.5 text-xs italic leading-relaxed text-ink/75">
-                      {section.blurb}
-                    </p>
-
-                    <ul className="mt-4 divide-y divide-maroon/10">
-                      {section.items.map((item) => (
-                        <li key={item.name} className="flex items-baseline py-2.5">
-                          <span className="font-medium text-ink/90">{item.name}</span>
-                          {item.price != null ? (
-                            <>
-                              <span className="leader" aria-hidden="true" />
-                              <span className="font-display text-base font-semibold text-maroon">
-                                ₹{item.price}
-                              </span>
-                            </>
-                          ) : null}
+                    <p className="mt-3 max-w-md text-sm leading-relaxed text-ink/62">{section.blurb}</p>
+                    <ul className="mt-5 flex flex-wrap gap-x-3 gap-y-2">
+                      {section.items.map((item, itemIndex) => (
+                        <li key={item.name} className="flex items-center text-sm font-semibold text-ink/85 sm:text-base">
+                          {itemIndex > 0 ? <span className="mr-3 text-brass-deep" aria-hidden="true">●</span> : null}
+                          {item.name}
+                          {item.price != null ? <span className="ml-2 text-maroon">₹{item.price}</span> : null}
                         </li>
                       ))}
                     </ul>
-                  </Reveal>
+                  </div>
                 </div>
-              ))}
-            </div>
-
-            <div className="mt-12 text-center">
-              <Separator className="mx-auto text-terracotta/45" />
-              <p className="mt-5 font-display text-base italic text-maroon">
-                Let&rsquo;s make memories over good food and good times.
-              </p>
-              <p className="mt-4 text-xs text-ink/75">
-                All vegetarian
-                <span className="mx-2 text-terracotta/50">◆</span>
-                {site.hours}, {site.openDays.toLowerCase()}
-              </p>
-            </div>
+              </section>
+            ))}
           </div>
         </Reveal>
 
-        <Reveal className="mt-10 text-center">
-          <p className="text-sm text-parchment/80">
-            Prices are shown at the counter. Typically {site.priceRange} per person.
+        <Reveal className="mt-8 flex flex-col gap-4 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
+          <p className="text-xs leading-relaxed text-ink/58">
+            Prices are available at the counter and may change.
+          </p>
+          <p className="font-display text-lg italic text-maroon">
+            100% vegetarian · Typically {site.priceRange} per person
           </p>
         </Reveal>
       </div>

@@ -1,183 +1,160 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import Image from "next/image";
+import { useRef } from "react";
 import { mapsLink, site } from "@/data/site";
-import { Gopuram, KolamBorder, Separator } from "./Ornaments";
+import { NeyamWordmark } from "./neyam-wordmark";
 
-function HeroFacts({ compact = false }: { compact?: boolean }) {
-  const label = compact
-    ? "text-[10px] uppercase tracking-caps text-terracotta-ink"
-    : "text-[11px] uppercase tracking-caps text-parchment/80";
-  const value = compact
-    ? "mt-1 font-display text-sm text-maroon-deep"
-    : "mt-1.5 font-display text-sm text-parchment-light sm:text-lg";
+export default function Hero() {
+  const stageRef = useRef<HTMLDivElement | null>(null);
+
+  const moveDish = (event: React.PointerEvent<HTMLDivElement>) => {
+    const stage = stageRef.current;
+    if (!stage || event.pointerType === "touch") return;
+    const bounds = stage.getBoundingClientRect();
+    const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+    const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+    stage.style.setProperty("--hero-rx", `${(-y * 3).toFixed(2)}deg`);
+    stage.style.setProperty("--hero-ry", `${(x * 4).toFixed(2)}deg`);
+    stage.style.setProperty("--hero-x", `${(x * 6).toFixed(1)}px`);
+    stage.style.setProperty("--hero-y", `${(y * 5).toFixed(1)}px`);
+    stage.style.setProperty("--hero-sx", `${(-x * 3).toFixed(1)}px`);
+    stage.style.setProperty("--hero-sy", `${(-y * 2).toFixed(1)}px`);
+  };
+
+  const resetDish = () => {
+    const stage = stageRef.current;
+    if (!stage) return;
+    stage.style.removeProperty("--hero-rx");
+    stage.style.removeProperty("--hero-ry");
+    stage.style.removeProperty("--hero-x");
+    stage.style.removeProperty("--hero-y");
+    stage.style.removeProperty("--hero-sx");
+    stage.style.removeProperty("--hero-sy");
+  };
 
   return (
-    <dl
-      className={
-        compact
-          ? "grid grid-cols-3 gap-x-3"
-          : "hero-facts-main mt-10 grid max-w-2xl grid-cols-3 gap-x-4 gap-y-5 border-t border-parchment/20 pt-6 short:mt-5 short:pt-4 sm:gap-x-6 sm:pt-8 lg:mt-14 short:lg:mt-8"
-      }
+    <section
+      id="home"
+      className="hero-golden relative isolate min-h-[100svh] overflow-hidden bg-parchment-light text-maroon-deep"
     >
-      <div>
-        <dt className={label}>Open</dt>
-        <dd className={value}>{site.hours}</dd>
+      <div className="hero-paper absolute inset-0" aria-hidden="true" />
+      {/* This strip is absolutely positioned, so a second line would land on
+          top of the wordmark eyebrow rather than pushing it down. Below 360px
+          the two labels can't hold 0.2em tracking on one line, so the tracking
+          tightens there instead of letting them wrap. */}
+      <div className="absolute inset-x-0 top-[5.4rem] z-20 flex items-center justify-between whitespace-nowrap px-4 text-[11px] font-semibold uppercase tracking-[0.04em] text-maroon/70 xs:tracking-[0.2em] sm:px-7 lg:px-10">
+        <span>Model Colony · Pune</span>
+        <span className="hidden sm:inline">Daily · 8 AM–10 PM</span>
+        <span>100% vegetarian</span>
       </div>
-      <div>
-        <dt className={label}>Days</dt>
-        <dd className={value}>{site.openDays}</dd>
+
+      <div className="pointer-events-none absolute inset-x-0 top-[18%] z-20 text-center sm:top-[18%]">
+        <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.32em] text-terracotta-ink sm:text-xs">
+          Heritage Bangalore breakfast
+        </p>
+        <h1 className="hero-wordmark text-maroon-deep">
+          <NeyamWordmark className="mx-auto w-[clamp(17rem,62vw,60rem)]" />
+        </h1>
+        <p className="sr-only">
+          Neyam serves Bangalore-style benne dose, idli and filter kaapi in Model Colony, Pune.
+        </p>
       </div>
-      {site.googleRating != null && site.googleReviewCount != null ? (
-        <div>
-          <dt className={label}>On Google</dt>
-          <dd className={value}>
+
+      <div
+        ref={stageRef}
+        onPointerMove={moveDish}
+        onPointerLeave={resetDish}
+        className="hero-stage absolute left-1/2 top-[27%] z-10 -translate-x-1/2 sm:top-[27%] lg:left-[69%] lg:top-[34%] xl:left-[62%]"
+        aria-hidden="true"
+      >
+        <div className="hero-sun absolute left-1/2 top-[52%] aspect-square w-[118%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brass-deep">
+          <svg
+            viewBox="0 0 200 200"
+            className="hero-orbit absolute -inset-[10%] h-[120%] w-[120%] overflow-visible"
+          >
+            <defs>
+              <path
+                id="ghee-orbit"
+                d="M100,100 m-76,0 a76,76 0 1,1 152,0 a76,76 0 1,1 -152,0"
+              />
+            </defs>
+            <text className="fill-maroon-deep text-[7px] font-semibold uppercase tracking-[0.18em]">
+              <textPath href="#ghee-orbit">
+                Kaapi in the tumbler · Bengaluru in Pune · Poured the long way ·
+              </textPath>
+            </text>
+          </svg>
+        </div>
+
+        <div className="hero-dish absolute inset-0">
+          <div className="hero-shadow absolute bottom-[7%] left-[8%] h-[8%] w-[84%] rounded-[50%] bg-maroon/20 blur-2xl" />
+          <Image
+            src="/food/hero-kaapi-v3.webp"
+            alt=""
+            fill
+            priority
+            sizes="(min-width: 1280px) 24rem, (min-width: 1024px) 20rem, 72vw"
+            className="hero-dish-media object-contain drop-shadow-[0_30px_30px_rgba(82,31,18,.3)]"
+          />
+        </div>
+
+        <div className="hero-stamp absolute -right-[14%] top-[34%] grid h-[5.7rem] w-[5.7rem] rotate-[8deg] place-items-center rounded-full border-2 border-maroon bg-parchment-light text-center text-[11px] font-bold uppercase leading-tight tracking-[0.12em] text-maroon shadow-[0_10px_24px_rgba(82,31,18,.18)] sm:h-[7rem] sm:w-[7rem]">
+          Poured
+          <br />
+          the long way
+        </div>
+      </div>
+
+      <div className="absolute inset-x-0 bottom-[4.6rem] z-20 mx-auto grid max-w-site items-end gap-5 px-4 sm:px-7 md:grid-cols-[1fr_auto] lg:px-8">
+        <div className="hero-copy-block max-w-[31rem]">
+          <p className="hero-copy-headline font-display text-[clamp(1.55rem,2.7vw,2.45rem)] font-semibold leading-[1.02] tracking-[-0.025em]">
+            Bringing the authentic flavors of Bengaluru&apos;s breakfasts to the heart of Pune
+          </p>
+          <p className="hero-supporting-copy mt-2 hidden text-sm leading-relaxed text-ink/65 sm:block">
+            Crisp benne dose, soft thatte idli, and filter kaapi poured the long way.
+          </p>
+        </div>
+
+        <div className="flex items-center gap-3 md:justify-end">
+          {site.googleRating != null ? (
             <a
               href={site.googleListing}
               target="_blank"
               rel="noopener noreferrer"
-              className={`inline-flex min-h-[44px] items-center underline underline-offset-4 ${
-                compact
-                  ? "decoration-terracotta/40 hover:decoration-terracotta"
-                  : "decoration-brass/60 hover:decoration-brass"
-              }`}
+              className="hidden min-h-[50px] items-center px-3 text-sm font-semibold text-maroon sm:inline-flex"
             >
-              {site.googleRating.toFixed(1)} ★
-              <span className={`ml-1 text-xs ${compact ? "text-ink/70" : "text-parchment/85"}`}>
-                ({site.googleReviewCount})
-              </span>
+              {site.googleRating.toFixed(1)} <span className="ml-1 text-brass-deep">★</span>
             </a>
-          </dd>
-        </div>
-      ) : null}
-    </dl>
-  );
-}
-
-/**
- * HERO — the podi-on-idli footage, held behind parchment.
- *
- * The video is muted, inline and looping, and it is *not* autoplayed
- * blindly: it only starts once it can actually play, and it pauses when
- * scrolled out of view so it costs nothing while the reader is further
- * down the page. Under prefers-reduced-motion the poster frame is used
- * and the video never loads at all.
- */
-export default function Hero() {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    // Reduced motion: stop it dead and leave the poster frame showing.
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      video.removeAttribute("autoplay");
-      video.pause();
-      video.currentTime = 0;
-      return;
-    }
-
-    // Some browsers reject play() until the tab is interacted with; that's
-    // fine — the poster stays and nothing breaks.
-    void video.play().catch(() => {});
-
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) void video.play().catch(() => {});
-        else video.pause();
-      },
-      { threshold: 0.1 }
-    );
-    io.observe(video);
-    return () => io.disconnect();
-  }, []);
-
-  return (
-    <>
-      <section id="home" className="relative min-h-[100svh] overflow-hidden bg-maroon-deep">
-      {/* Footage */}
-      <video
-        ref={videoRef}
-        className="absolute inset-0 h-full w-full object-cover"
-        poster="/hero-poster.jpg"
-        // autoPlay is required as an attribute: a bare play() call is
-        // rejected without a user gesture in several browsers, which left
-        // the hero frozen on its poster. muted + playsInline make the
-        // attribute permissible under autoplay policy.
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        aria-hidden="true"
-        tabIndex={-1}
-      >
-        <source src="/hero.mp4" type="video/mp4" />
-      </video>
-
-      {/* Readability scrim. Deep at the bottom where the type sits. */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-b from-maroon-deep/70 via-maroon-deep/45 to-maroon-deep/92"
-      />
-
-      {/* Gopuram watermark, barely there */}
-      <Gopuram className="pointer-events-none absolute -right-10 bottom-24 hidden h-[30rem] w-auto text-parchment/[0.07] lg:block" />
-
-      {/* Padding tightens twice: once for narrow screens, and again via the
-          `short` height variant so a landscape tablet or short laptop still
-          lands the stats row above the fold. */}
-      <div className="relative mx-auto flex min-h-[100svh] max-w-site flex-col justify-end px-4 pb-14 pt-28 short:pb-8 short:pt-24 sm:px-6 sm:pb-20 lg:px-8 lg:pb-32 lg:pt-32 short:lg:pb-14 short:lg:pt-24">
-        <p className="eyebrow !text-parchment/90">
-          {site.address.line2} · {site.address.city}
-        </p>
-
-        {/* The size is capped against viewport *height* as well as width, so a
-            short landscape window doesn't get 80px display type. */}
-        <h1 className="mt-6 max-w-4xl font-display text-[clamp(2.45rem,min(11vw,10.5vh),5.5rem)] font-semibold leading-[1.02] text-parchment-light short:mt-3 sm:text-[clamp(2.7rem,min(8vw,10.5vh),5.5rem)]">
-          A slower corner of
-          <br className="hidden sm:block" /> South India,
-          <span className="italic text-brass"> brought to Pune.</span>
-        </h1>
-
-        <Separator className="mt-8 text-parchment/40 short:mt-4" />
-
-        <p className="mt-6 max-w-xl text-base leading-relaxed text-parchment/90 short:mt-4 md:text-lg">
-          Bangalore Benne Dose crisped in ghee, thatte idli under a dusting of
-          podi, and filter kaapi poured the long way. Breakfast, unhurried.
-        </p>
-
-        <div className="mt-10 flex flex-col gap-3 short:mt-5 sm:flex-row sm:flex-wrap sm:gap-4">
-          <a
-            href="#menu"
-            className="inline-flex min-h-[50px] items-center justify-center rounded-full bg-parchment-light px-8 text-base font-semibold text-maroon-deep transition-transform duration-300 hover:-translate-y-0.5 sm:min-h-[54px]"
-          >
-            See the Menu
-          </a>
+          ) : null}
           <a
             href={mapsLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex min-h-[50px] items-center justify-center rounded-full border border-parchment/40 px-8 text-base font-semibold text-parchment-light transition-colors hover:border-parchment hover:bg-parchment/10 sm:min-h-[54px]"
+            data-cta="hero-directions"
+            className="inline-flex min-h-[54px] flex-1 items-center justify-center gap-2 rounded-full bg-maroon px-7 text-sm font-semibold text-parchment-light shadow-[0_12px_30px_rgba(82,31,18,.22)] transition duration-300 hover:-translate-y-1 hover:bg-maroon-deep md:flex-none"
           >
-            Get Directions
+            Find your table <span aria-hidden="true">↗</span>
           </a>
         </div>
-
-        <HeroFacts />
       </div>
 
-      {/* Kolam run along the very bottom edge, as on the brand's artwork */}
-      <div className="absolute inset-x-0 bottom-0 overflow-hidden text-brass/40" aria-hidden="true">
-        <KolamBorder height={18} uid="hero" />
-      </div>
-      </section>
-      <div className="hero-facts-short border-b border-maroon/10 bg-parchment-deep px-4 py-4">
-        <div className="mx-auto max-w-site">
-          <HeroFacts compact />
+      <div className="hero-ticker absolute inset-x-0 bottom-0 z-30 overflow-hidden bg-maroon py-3 text-parchment-light">
+        <div className="hero-ticker-track flex w-max items-center text-[11px] font-semibold uppercase tracking-[0.24em]">
+          {[0, 1].map((copy) => (
+            <span key={copy} className="flex items-center whitespace-nowrap">
+              <span className="mx-7">Benne dose with crisp edges</span>
+              <span className="text-brass">●</span>
+              <span className="mx-7">Thatte idli soft at heart</span>
+              <span className="text-brass">●</span>
+              <span className="mx-7">Filter kaapi poured long</span>
+              <span className="text-brass">●</span>
+              <span className="mx-7">Breakfast until dinner</span>
+              <span className="text-brass">●</span>
+            </span>
+          ))}
         </div>
       </div>
-    </>
+    </section>
   );
 }
