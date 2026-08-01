@@ -49,9 +49,9 @@ Preserved from the completed pre-Golden-Morning verification cycle.
 ## Functional and conversion checks
 
 - [x] Every Directions CTA resolves to the intended Model Colony destination.
-- [x] Menu CTA lands on the menu; anchored headings clear the fixed header.
+- [x] Menu CTA lands on the menu; anchored headings use 68 px clearance below 640 px, 76 px through 767.98 px, and the preserved 88 px clearance from 768 px.
 - [x] Header drawer traps/returns focus, closes with Escape, and does not scroll the page behind it.
-- [x] Mobile quick actions appear only when useful and retire before overlapping Visit/footer.
+- [x] Phone quick actions render only below 640 px, appear only when useful, retire before overlapping Visit/footer, and leave the focus order when hidden.
 - [x] Snap rails work by swipe, trackpad, and keyboard without trapping page scroll.
 - [x] Videos load posters, expose play/pause, never autoplay audio, and report button state.
 - [x] With JavaScript disabled, core copy, menu, address, and links remain available.
@@ -132,11 +132,11 @@ The 22 21st findings are informational suggestions, not errors or warnings. No c
 
 | Viewport | Hero hierarchy | Page overflow | Accessibility/interactions | Result |
 |---|---|---|---|---|
-| 320×568 | Wordmark, kaapi, copy, CTA clear | None | Touch targets/reduced motion pass | Pass |
-| 390×667 | Wordmark, kaapi, copy, CTA clear | None | Touch targets/reduced motion pass | Pass |
-| 390×844 | Wordmark, kaapi, copy, CTA clear | None | Touch targets/reduced motion pass | Pass |
-| 768×700 | Short-height composition clear | None | Drawer/focus pass | Pass |
-| 768×1024 | Tablet composition clear | None | Drawer/focus pass | Pass |
+| 320×568 | Phone normal-flow Hero/Signatures; compact `≤700.98px` hero clear | None | 68 px header offset; dock/touch targets/reduced motion pass | Pass |
+| 390×667 | Phone normal-flow Hero/Signatures; compact `≤700.98px` hero clear | None | 68 px header offset; dock/touch targets/reduced motion pass | Pass |
+| 390×844 | Phone normal-flow Hero/Signatures clear | None | 68 px header offset; dock/touch targets/reduced motion pass | Pass |
+| 768×700 | Tablet absolute layout; fractional-safe short-height composition clear | None | 76 px header/88 px anchor clearance; drawer/focus pass; no phone dock | Pass |
+| 768×1024 | Tablet absolute layout clear | None | 76 px header/88 px anchor clearance; drawer/focus pass; no phone dock | Pass |
 | 1024×700 | Dedicated short-laptop composition; wordmark/kaapi and copy/CTA clear | None | Keyboard/focus pass | Pass |
 | 1024×768 | Laptop composition clear | None | Keyboard/focus pass | Pass |
 | 1280×800 | Desktop composition clear | None | Keyboard/focus pass | Pass |
@@ -147,8 +147,11 @@ The 22 21st findings are informational suggestions, not errors or warnings. No c
 - [x] Next.js 15.5.22 production build passed and exported **6/6 pages**.
 - [x] Standalone `npx tsc --noEmit` passed.
 - [x] 21st review inspected 26 files with **0 errors, 0 warnings, and 24 informational hardcoded-color suggestions**; no blocker.
-- [x] Final code review scored **9.7/10** with 0 critical findings.
-- [x] All nine viewport/height combinations passed with no horizontal overflow.
+- [x] Final code review scored **9.8/10** with 0 critical findings.
+- [x] All fifteen viewport/height combinations passed with no horizontal overflow.
+- [x] Hero and Signatures remain in normal document flow through 767.98 px and switch to the layered absolute composition at 768 px without changing semantic or keyboard order.
+- [x] Header/anchor clearance passed at 68 px below 640 px, 76 px through 767.98 px, and the preserved 76 px header/88 px anchor clearance from 768 px; the quick dock is restricted below 640 px.
+- [x] The fractional-safe `max-height: 700.98px` compact rules cover nominal 700 px phone/tablet canvases.
 - [x] The 1024×700 breakpoint kept wordmark/kaapi and copy/CTA collision-free with zero overflow.
 - [x] Drawer modal/focus/inert behavior and Escape handling passed.
 - [x] Touch targets and two-color focus visibility passed.

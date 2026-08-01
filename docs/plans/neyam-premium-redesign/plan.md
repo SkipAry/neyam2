@@ -63,8 +63,12 @@ Completed the original dark, split-cinematic conversion funnel and established c
 - [x] Reduce hero pointer motion to restrained depth, slow decorative loops, and retain complete reduced-motion fallbacks.
 - [x] Add two-color focus visibility, accessible decorative semantics, live signature-dish announcements, and verified drawer/modal/inert behavior.
 - [x] Move Philosophy from a full brass field to a calmer parchment-deep surface with a brass medallion and ghost word.
+- [x] Keep Hero and Signatures in normal document flow through 767.98 px; restore the art-directed absolute composition from 768 px.
+- [x] Match normal-flow hero and anchor offsets to the fixed header: 68 px below 640 px and 76 px through 767.98 px; preserve the existing 88 px anchor clearance from 768 px.
+- [x] Limit the quick-action dock to phones below 640 px and keep tablet navigation in the header drawer.
+- [x] Use the fractional-safe 700.98 px short-height threshold so 700 px phone/tablet canvases reliably receive the compact hero treatment.
 - [x] Add and verify a dedicated 1024×700 short-laptop hero composition.
-- [x] Verify nine viewport/height combinations, production export, standalone TypeScript, 21st review, and final code review.
+- [x] Verify fifteen viewport/height combinations, production export, standalone TypeScript, 21st review, and final code review.
 
 ## Phases
 
@@ -108,8 +112,11 @@ Progress: **Completed.** Implementation and QA passed. Launch-only content/confi
 - Next.js 15.5.22 production build passed; static export generated **6/6 pages**.
 - Standalone `npx tsc --noEmit` passed.
 - 21st review inspected 26 files: **0 errors, 0 warnings, 24 informational hardcoded-color suggestions**, no blockers.
-- Final code review: **9.7/10**, 0 critical findings.
-- Matrix passed at 320×568, 390×667, 390×844, 768×700, 768×1024, 1024×700, 1024×768, 1280×800, and 1440×900.
+- Final code review: **9.8/10**, 0 critical findings.
+- Extended matrix passed fifteen phone, narrow-tablet, iPad, laptop, and desktop viewport/height combinations from 320×568 through 1440×900.
+- At 320/390 px, Hero and Signatures use collision-resistant normal flow; at 768 px the tablet composition switches cleanly to its absolute art direction.
+- The header is 68 px below 640 px and 76 px above it; anchor clearance is 68 px below 640 px, 76 px through 767.98 px, and the preserved 88 px from 768 px. The quick dock remains phone-only.
+- Short phone/tablet layouts use `max-height: 700.98px`, avoiding fractional viewport rounding gaps around the tested 700 px height.
 - The 1024×700 short-laptop layout keeps wordmark/kaapi and copy/CTA clear with zero overflow.
 - Drawer modal/focus/inert behavior, touch targets, live signature selector, FAQ, reduced motion, and overflow checks passed.
 - Rendered output contains no telephone link and no `neyam.in`.

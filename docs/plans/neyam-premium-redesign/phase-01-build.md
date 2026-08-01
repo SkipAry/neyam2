@@ -184,14 +184,24 @@ Preserved from the completed “The Ghee House” build. Golden Morning supersed
 - [x] Disable hero depth, dish animation, reveal motion, ticker/orbit motion, and transitions under `prefers-reduced-motion`.
 - [x] Add the 1024×700 short-laptop composition through the desktop short-height media query: compact kaapi stage, clear wordmark, hidden supporting copy, and unobstructed CTA.
 
+### Responsive flow and navigation
+
+- [x] Through 767.98 px, change Hero and Signatures from layered absolute stages to normal document flow so copy, food imagery, selectors, and CTAs grow naturally without overlap or clipping.
+- [x] From 768 px, retain the art-directed tablet/desktop absolute layout and its deliberate media/copy lanes.
+- [x] Use a 68 px fixed-header/anchor offset below 640 px and 76 px through 767.98 px; preserve the existing 88 px anchor clearance from 768 px while the header remains 76 px.
+- [x] Show the Menu/Directions quick dock only below 640 px; keep it out of the hero, Visit/footer, and open modal drawer.
+- [x] Use `max-height: 700.98px` for compact phone/tablet hero rules so fractional CSS viewport calculations still include nominal 700 px canvases.
+- [x] Preserve the modal drawer's focus trap, inert/`aria-hidden` page isolation, scroll lock, Escape close, and focus/state restoration across the responsive changes.
+
 ### Final acceptance evidence
 
 - [x] Next.js 15.5.22 production build and **6/6** static pages pass.
 - [x] Standalone `npx tsc --noEmit` passes.
-- [x] Nine viewport/height combinations pass with no overflow or hero collision.
+- [x] Fifteen viewport/height combinations pass with no overflow or hero collision.
+- [x] Phone normal-flow and 768 px tablet absolute-layout modes preserve visual order, touch targets, and signature live-region/`aria-pressed` behavior.
 - [x] At 1024×700, wordmark/kaapi and copy/CTA remain clear with zero overflow.
 - [x] 21st review: 26 files, 0 errors, 0 warnings, 24 informational hardcoded-color suggestions, no blockers.
-- [x] Final code review: 9.7/10, 0 critical findings.
+- [x] Final code review: 9.8/10, 0 critical findings.
 
 ## Iteration 1 reconciliation history
 
